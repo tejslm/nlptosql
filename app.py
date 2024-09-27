@@ -16,7 +16,7 @@ file.close()
 
 # Configure Genai key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-key_path = "/Users/sa20525057/Desktop/GenAI_Usecases/halogen-episode-433706-a4-6a1ca4a71658.json"
+key_path = "halogen-episode-433706-a4-6a1ca4a71658.json"
 project_id = "halogen-episode-433706-a4"
 
 
