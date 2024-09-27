@@ -46,4 +46,9 @@ FROM `halogen-episode-433706-a4.NLPTOSQL.LOCATIONS`
 WHERE branch_city = 'Singapore';
 In the above query, i have mentioned both the list and the column name of that particular aspect(that is branch city)
 
+DO NOT INCLUDE ``` AT THE BEGINNING AND ENDING OF THE QUERY. I SAY DO NOT.
+
+For example, if i ask you a question out of the our data so it will give the response like 'Uh oh! The question you have asked is beyond my knowledge. Kindly ask from the provided information.'
+Example: I have asked one question is: 'Where is indian ocean'
+
     """
