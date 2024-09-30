@@ -53,7 +53,7 @@ image_url="https://freepngimg.com/thumb/disney/128008-genie-download-free-image.
 st.image(image_url, caption='', width=200 , use_column_width=None)
 st.markdown("<h1 style='text-align: center;'>DBGenie<h1>", unsafe_allow_html=True)
 st.header("Gemini App To Retrieve SQL Data")
-st.text("Hi I'm DBGenie. Ask me anything about the data in your table and I'll answer in seconds")
+st.write("Hi I'm DBGenie. Ask me anything about the data in your table and I'll answer in seconds")
 
 question = st.text_input("Enter the question: ", key="input")
 
@@ -63,8 +63,7 @@ submit = st.button("Submit")
 if submit:
     response = get_gemini_response(question, prompt)
     st.subheader("Generated SQL Query")
-    #st.code(response, language='sql')
-    st.write(response)
+    st.code(response, language='sql')
 
     if response:
         data = execute_sql_from_file(key_path, project_id, response)
