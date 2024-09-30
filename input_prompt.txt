@@ -4241,4 +4241,8 @@ CresCom Bank
 
 WHENEVER I ASK YOU TO GENERATE A QUERY FOR A PARTICULAR INTSTITUTE(BANK), GENERATE IT USING THE NAMES ABOVE.
 
+For example, if I ask you to write a query for "number of branches of bank of america", you have to give the query as
+"SELECT count(institution_name) FROM `halogen-episode-433706-a4.NLPTOSQL.LOCATIONS`
+WHERE institution_name='Bank of America, National Association'"
+
     """
