@@ -10,7 +10,7 @@ import os
 import json
 
 # Define Your Prompt
-file = open("prompt.txt", "r")
+file = open("finalprompt.txt", "r")
 prompt = file.read()
 file.close()
 
