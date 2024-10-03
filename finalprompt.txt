@@ -1,0 +1,4261 @@
+    You are an expert in converting English questions to SQL query to run them on Google BigQuery.
+I have mentioned 3 points down below that are enclosed with {} make sure you consider all those 3 points and answer accordingly
+
+1: {
+    
+   fdic_certificate_number
+    institution_name
+    branch_name
+    branch_number
+    main_office
+    branch_address
+    branch_city
+    zip_code
+    branch_county
+    county_fips_code
+    state
+    state_name
+    institution_class
+    cbsa_fips_code
+    cbsa_name
+    cbsa_division_flag
+    cbsa_division_fips_code
+    cbsa_division_name
+    cbsa_metro_flag
+    cbsa_metro_fips_code
+    cbsa_metro_name
+    cbsa_micro_flag
+    csa_flag
+    csa_fips_code
+    csa_name
+    date_established
+    fdic_uninum
+    last_updated
+    service_type
+    branch_fdic_uninum
+
+    Above are the column names of the table. The table name and location is ‘halogen-episode-433706-a4.NLPTOSQL.LOCATIONS`.
+    When I ask you a question, give me an SQL BigQuery that matches the names of columns above. For example, if I ask you to list all the institute names from a pincode 533440, you have to give me the SQL query as:
+    SELECT institution_name FROM `halogen-episode-433706-a4.NLPTOSQL.LOCATIONS` WHERE zip_code = 533440;
+    Example 2: When I ask you how many branches of ‘Aditya Hospitals’ are available in ‘Singapore’, you have to give me the SQL query as:
+    SELECT count(institution_name) FROM `halogen-episode-433706-a4.NLPTOSQL.LOCATIONS` WHERE institution_name='Aditya Hospitals' AND branch_city='Singapore';
+    Be aware: Always make the city names in the following pattern; Make the first letter upper case and the rest of the name in lower case. If the name has two words in it, make the first letter of both words upper case. For example, if i ask you about hongkong, give me the result as 'Hong Kong'
+    And follow the same pattern for institute name as well.
+    When I ask you a list of anything, also include the column name of the particular aspect.
+
+}
+
+2: {
+For example when I ask you to give me a list of x in y, include the list of x as well as the column y.
+By the above example, i mean the following. When I ask you "Give me list of institutes in singapore", give me the query as 
+"SELECT DISTINCT institution_name, branch_city
+FROM `halogen-episode-433706-a4.NLPTOSQL.LOCATIONS`
+WHERE branch_city = 'Singapore';
+In the above query, i have mentioned both the list and the column name of that particular aspect(that is branch city)
+
+DO NOT INCLUDE ``` AT THE BEGINNING AND ENDING OF THE QUERY. I SAY DO NOT.
+
+For example, if i ask you a question out of the our data so it will give the response like 'Uh oh! The question you have asked is beyond my knowledge. Kindly ask from the provided information.'
+Example: I have asked one question is: 'Where is indian ocean'
+
+}
+
+3: {
+
+
+THE BELOW ARE THE INSTITUTE NAMES MENTIONED IN THE TABLE:
+Citibank, National Association
+JPMorgan Chase Bank, National Association
+Bank of America, National Association
+Regions Bank
+The Bank of New York Mellon
+Israel Discount Bank of New York
+HSBC Bank USA, National Association
+Citizens Bank, National Association
+Wells Fargo Bank, National Association
+Manufacturers and Traders Trust Company
+BNY Mellon, National Association
+PNC Bank, National Association
+Mizuho Bank (USA)
+First Hawaiian Bank
+TD Bank, National Association
+U.S. Bank National Association
+Capital One, National Association
+Falcon International Bank
+Lake City Bank
+East West Bank
+Comerica Bank
+Bank of the Orient
+FirstBank Puerto Rico
+Capital One Bank (USA), National Association
+Bank of the West
+Webster Bank, National Association
+The Northern Trust Company
+American Express National  Bank
+The Huntington National Bank
+Cathay Bank
+Banco Popular de Puerto Rico
+Oriental Bank
+Merchants Commercial Bank
+United Fidelity Bank, fsb
+Hingham Institution for Savings
+Rockland Trust Company
+The Cape Cod Five Cents Savings Bank
+Meredith Village Savings Bank
+Bank of New Hampshire
+Northway Bank
+Union Bank
+Profile Bank
+Norway Savings Bank
+Northeast Bank
+Androscoggin Savings Bank
+Franklin Savings Bank
+KeyBank National Association
+Bangor Savings Bank
+The Camden National Bank
+Machias Savings Bank
+Bath Savings Institution
+First Federal Savings and Loan Association of Bath
+First National Bank
+Rockland Savings Bank, FSB
+Bar Harbor Bank & Trust
+Bar Harbor Savings and Loan Association
+Katahdin Trust Company
+Aroostook County Federal Savings and Loan Association
+Skowhegan Savings Bank
+Passumpsic Savings Bank
+Community Bank, National Association
+The Brattleboro Savings and Loan Association
+The National Bank of Middlebury
+Community National Bank
+The First National Bank of Orwell
+The National Bank of Coxsackie
+Pioneer Bank
+The Bank of Greene County
+NBT Bank, National Association
+Wayne Bank
+TrustCo Bank
+Greene County Commercial Bank
+The Delaware National Bank of Delhi
+Jeff Bank
+Catskill Hudson Bank
+NorthEast Community Bank
+Glens Falls National Bank and Trust Company
+Champlain National Bank
+Adirondack Bank
+Carthage Savings and Loan, National Association
+Tompkins Community Bank
+Five Star Bank
+Chemung Canal Trust Company
+First Citizens Community Bank
+Community Bank
+First Federal Savings and Loan Association of Greene Co
+First National Bank of Pennsylvania
+Woodforest National Bank
+Hometown Bank of Pennsylvania
+Truist Bank
+Altoona First Savings Bank
+First Commonwealth Bank
+Somerset Trust Company
+Dollar Bank, Federal Savings Bank
+Marion Center Bank
+S&T Bank
+The Farmers National Bank of Emlenton
+CNB Bank
+InFirst Bank
+Northwest Bank
+Citizens & Northern Bank
+Clarion County Community Bank
+First United National Bank
+Community State Bank of Orbisonia
+The Juniata Valley Bank
+Pennian Bank
+Farmers and Merchants Trust Company of Chambersburg
+The Dime Bank
+The Honesdale National Bank
+Citizens Savings Bank
+FNCB Bank
+PS Bank
+Peoples Security Bank and Trust Company
+First United Bank & Trust
+Clear Mountain Bank
+Miners & Merchants Bank
+The Peoples Bank
+The Chesapeake Bank & Trust Co.
+Shore United Bank, N.A.
+Provident State Bank, Inc.
+The Queenstown Bank of Maryland
+Atlantic Union Bank
+United Bank
+Primis Bank
+Blue Ridge Bank,  National Association
+Chesapeake Bank
+Citizens and Farmers Bank
+City National Bank of West Virginia
+First Bank
+The First Bank and Trust Company
+Farmers & Merchants Bank
+Virginia National Bank
+First Horizon Bank
+Calvin B. Taylor Banking Company of Berlin, Maryland
+Citizens Bank and Trust Company
+Benchmark Community Bank
+First Community Bank
+First-Citizens Bank & Trust Company
+The Bank of Southside Virginia
+Touchstone Bank
+The Farmers Bank of Appomattox
+The Bank of Charlotte County
+Carter Bank & Trust
+SKYLINE NATIONAL BANK
+Surrey Bank & Trust
+New Peoples Bank, Inc.
+Farmers and Miners Bank
+The Bank of Marion
+Powell Valley National Bank
+Lee Bank and Trust Company
+First Sentinel Bank
+TruPoint Bank
+First US Bank
+The National Bank of Blacksburg
+Summit Community Bank, Inc
+The Blue Grass Valley Bank
+CornerStone Bank
+Highlands Community Bank
+Peoples Bank
+Bank of Botetourt
+Bank of the James
+American National Bank and Trust Company
+Legacy Bank
+MCNB Bank and Trust Co.
+Pioneer Community Bank, Inc.
+The Bank of Monroe
+Pendleton Community Bank, Inc.
+The First National Bank of Peterstown
+Calhoun County Bank, Inc.
+The Poca Valley Bank, Inc.
+First Neighborhood Bank
+Bank of Mingo
+The First National Bank of Williamson
+Community Trust Bank, Inc.
+The Pleasants County Bank
+Union Bank, Inc.
+First Mutual Bank, FSB
+WesBanco Bank, Inc.
+Citizens Bank of West Virginia, Inc.
+Freedom Bank, Inc.
+BCBank, Inc.
+The Grant County Bank
+Mountain Valley Bank, N.A.
+West Union Bank
+The Citizens Bank of Weston
+First Exchange Bank
+Capon Valley Bank
+The Fidelity Bank
+Southern Bank and Trust Company
+United Community Bank
+Fifth Third Bank, National Association
+Bank of Tennessee
+LifeStore Bank
+HomeTrust Bank
+Nantahala Bank & Trust Company
+SouthState Bank, National Association
+Home Federal Savings and Loan Association
+Enterprise Bank of South Carolina
+First Palmetto Bank
+Synovus Bank
+Bank of Greeleyville
+The Citizens Bank
+1st Federal Savings Bank of SC, Inc.
+Bank of the Lowcountry
+Carolina Bank & Trust Co.
+Anderson Brothers Bank
+Kingstree Federal Savings and Loan Association
+Pee Dee Federal Savings Bank
+Abbeville First Bank, SSB
+The Commercial Bank
+Palmetto State Bank
+Persons Banking Company
+The Citizens Bank of Swainsboro
+Durden Banking Company, Incorporated
+Queensborough National Bank & Trust Company
+Wheeler County State Bank
+The Claxton Bank
+Glennville Bank
+South Georgia Bank
+Cadence Bank
+First State Bank
+Pineland Bank
+Bank of Newington
+Renasant Bank
+Farmers and Merchants Bank
+Pinnacle Bank
+River City Bank
+Bank OZK
+Northeast Georgia Bank
+Rabun County Bank
+First American Bank and Trust Company
+Oconee Federal Savings and Loan Association
+The Piedmont Bank
+Peoples Bank of East Tennessee
+F&M Bank
+Elberton Federal Savings and Loan Association
+Exchange Bank
+BankSouth
+The Farmers Bank
+Farmers State Bank
+Southern Bank
+Wilcox County State Bank
+Ameris Bank
+State Bank of Cochran
+Great Oaks Bank
+The Citizens Bank of Cochran
+Magnolia State Bank
+Colony Bank
+Planters First Bank
+Sunmark Community Bank
+Apex Banking Company of Georgia
+The Merchants & Citizens Bank
+The Security State Bank
+Bank of Lumber City
+Georgia Community Bank
+Rochelle State Bank
+The Geo. D. Warthen Bank
+Citizens Bank of the South
+South Georgia Banking Company
+FNB SOUTH
+Community Bank of Georgia
+Southeastern Bank
+Altamaha Bank & Trust Company
+Bank of Hazlehurst
+The Trust Bank
+Bank of Alapaha
+Heritage Southeast Bank
+Bank of Camilla
+Family Bank
+Planters and Citizens Bank
+Guardian Bank
+Citizens Bank of Americus
+Capital City Bank
+Lafayette State Bank
+First Federal Bank
+Community State Bank
+Drummond Community Bank
+PeoplesSouth Bank
+Centennial Bank
+Madison County Community Bank
+One Florida Bank
+Peoples Bank of Graceville
+Hancock Whitney Bank
+West Alabama Bank & Trust
+Investar Bank, National Association
+Premier Bank of the South
+BankFirst Financial Services
+Traditions Bank
+State Bank & Trust
+PeoplesTrust Bank
+First State Bank of the South, Inc.
+CB&S Bank, Inc.
+Community Spirit Bank
+Valley State Bank
+Bank Independent
+The Bank of Vernon
+Citizens State Bank
+The Citizens Bank of Winfield
+First Metro Bank
+Union State Bank
+Peoples Bank of Alabama
+First Southern State Bank
+The Southern Bank Company
+Brantley Bank and Trust Company
+The First National Bank of Dozier
+Trustmark National Bank
+First Citizens Bank
+Community Neighbor Bank
+Liberty Bank and Trust Company
+AmeriFirst Bank
+Community Bank and Trust - Alabama
+FirstState Bank
+First Bank of Alabama
+Metro Bank
+NobleBank & Trust
+Southern States Bank
+Bank of Evergreen
+CCB Community Bank
+Southern Independent Bank
+The First National Bank and Trust
+Peoples Exchange Bank
+Local Bank
+SmartBank
+Town Country United Bank
+Sweet Water State Bank
+Robertson Banking Company
+Marion Community Bank
+AuburnBank
+Citizens Bank of Lafayette
+Wilson Bank and Trust
+First Farmers and Merchants Bank
+Traditions First Bank
+First Financial Bank, National Association
+Bank of Perry County
+FirstBank
+Apex Bank
+Citizens Tri-County Bank
+SimplyBank.
+SouthEast Bank
+First National Bank of Pulaski
+Bank of Lincoln County
+First Commerce Bank
+Simmons Bank
+Volunteer Federal Savings Bank
+CapStar Bank
+Tower Community Bank
+First Farmers & Commercial Bank
+Johnson County Bank
+Elizabethton Federal Savings Bank
+Hearthside Bank Corporation
+Commercial Bank
+First Century Bank
+The First National Bank of Oneida
+United Cumberland Bank
+First State Bank of the Southeast, Inc
+One Bank of Tennessee
+Thread Bank
+The Bank of Fayette County
+Gates Banking and Trust Company
+Bank of Halls
+The Lauderdale County Bank
+BankTennessee
+First Citizens National Bank
+Bank of Ripley
+Carroll Bank and Trust
+Bank of Gleason
+McKenzie Banking Company
+Lineage Bank
+The Hardin County Bank
+Central Bank
+Decatur County Bank
+Home Banking Company
+Farmers Bank
+Wayne County Bank
+Bank of Frankewing
+People's Bank and Trust Company of Pickett County
+Macon Bank and Trust Company
+Builtwell Bank
+Citizens Bank
+First National Bank of Tennessee
+Unity Bank of Mississippi
+Planters Bank & Trust Company
+First Security Bank
+Guaranty Bank and Trust Company
+Bank of Holly Springs
+Southern Bancorp Bank
+Citizens Bank & Trust Co.
+BNA Bank
+Bank of Anguilla
+BankPlus
+Amory Federal Savings and Loan Association
+Community Bank of Mississippi
+First American National Bank
+First Choice Bank
+BankOkolona
+Bank of Commerce
+Mechanics Bank
+Bank of Kilmichael
+Bank of Winona
+First Financial Bank
+The Citizens National Bank of Meridian
+The Citizens Bank of Philadelphia, Mississippi
+United Mississippi Bank
+The Bank of Forest
+Holmes County Bank
+PriorityOne Bank
+Bank of Morton
+RiverHills Bank
+Great Southern Bank
+Pike National Bank
+First Southern Bank
+Merchants & Marine Bank
+Century Bank
+Bank of Franklin
+Concordia Bank & Trust Company
+The First Bank
+First Federal Savings and Loan Association
+First State Bank of Blakely
+OneSouth Bank
+First National Bank of Decatur County
+United National Bank
+First State Bank of Randolph County
+First Port City Bank
+The Bank of Edison
+Bedford Loan & Deposit Bank
+The Citizens National Bank of Lebanon
+The Farmers National Bank of Lebanon
+The Farmers Bank of Milton
+Springfield State Bank
+The Cecilian Bank
+Whitaker Bank
+The Farmers National Bank of Danville
+Stock Yards Bank & Trust Company
+The First National Bank of Grayson
+German American Bank
+Citizens Guaranty Bank
+Jackson County Bank
+First Federal Savings Bank of Kentucky
+First Southern National Bank
+PBK BANK, INC.
+The Monticello Banking Company
+Hyden Citizens Bank
+FIRST NATIONAL BANK OF KENTUCKY
+Carrollton Federal Bank
+United Citizens Bank & Trust Company
+Field & Main Bank
+Peoples Bank of  Kentucky, Inc.
+Pinnacle Bank, Inc.
+First Guaranty Bank
+Kentucky Farmers Bank Corporation
+Citizens Bank of Kentucky, Inc.
+Farmers & Traders Bank of Campton
+Citizens Bank & Trust Co. of Jackson
+Bank of the Mountains, Inc.
+The Salyersville National Bank
+Peoples Bank & Trust Company of Hazard
+1st Trust Bank, Inc.
+Bank of Hindman
+Citizens Deposit Bank of Arlington, Inc.
+First Kentucky Bank, Inc.
+FNB Bank, Inc.
+Community Financial Services Bank
+Clinton Bank
+First Community Bank of the Heartland, Inc.
+Farmers Bank and Trust Company
+Fredonia Valley Bank
+Security Bank and Trust Company
+First United Bank and Trust Company
+Magnolia Bank, Incorporated
+South Central Bank,  Inc.
+Franklin Bank & Trust Company
+Edmonton State Bank
+Bank of England
+Lewisburg Banking Company
+Auburn Banking Company
+United Southern Bank
+Elkton Bank & Trust Company
+Limestone Bank, Inc.
+Commonwealth Community Bank, Inc.
+United Community Bank of West Kentucky, Inc.
+Old National Bank
+Planters Bank, Inc.
+Independence Bank of Kentucky
+Sonata Bank
+The Casey County Bank, Inc.
+First & Farmers National Bank, Inc.
+Bank of Jamestown
+The Citizens National Bank of Somerset
+The First National Bank of Russell Springs
+United Citizens Bank of Southern Kentucky
+Wilson & Muir Bank & Trust Company
+Citizens Bank of Cumberland County, Inc.
+The Sacramento Deposit Bank
+Bank of Clarkson
+Bank of Columbia
+Hart County Bank and Trust Company
+The First Citizens National Bank of Upper Sandusky
+Premier Bank
+Community First Bank, National Association
+The Home Savings and Loan Company of Kenton, Ohio
+Liberty National Bank
+The Mt. Victory State Bank
+The Farmers & Merchants State Bank
+The State Bank and Trust Company
+The Corn City State Bank
+The Hicksville Bank
+The Hamler State Bank
+Civista Bank
+The Sherwood State Bank
+The Farmers and Merchants Bank
+Community Savings
+The Citizens National Bank of McConnelsville
+The First National Bank of McConnelsville
+North Valley Bank
+The Citizens National Bank of Woodsfield
+Woodsfield Savings Bank
+The Baltic State Bank
+The Equitable Savings and Loan Company
+Unified Bank
+SSB Community Bank
+The Killbuck Savings Bank Company
+The Commercial and Savings Bank of Millersburg, Ohio
+First Federal Community Bank, National Association
+The Park National Bank
+Wayne Savings Community Bank
+The First National Bank of Sycamore
+Southern Hills Community Bank
+The Merchants National Bank
+Community Savings Bank
+NATIONAL COOPERATIVE BANK, N.A.
+The Wilmington Savings Bank
+Somerville Bank
+LCNB National Bank
+The Twin Valley Bank
+The Farmers State Bank
+The Brookville Building and Savings Association
+United Midwest Savings Bank, National Association
+The First National Bank of Waverly
+THE VINTON COUNTY NATIONAL BANK
+The Ohio Valley Bank Company
+The National Bank of Adams County of West Union
+Home National Bank
+The Peoples Savings Bank
+The Farmers Bank and Savings Company
+The Antwerp Exchange Bank Company
+The Fort Jennings State Bank
+The Union Bank Company
+The First National Bank of Pandora
+The Ottoville Bank Company
+First Farmers Bank & Trust Co.
+BMO Harris Bank National Association
+STAR Financial Bank
+Citizens State Bank of New Castle, Indiana
+Flagstar Bank, FSB
+Union Savings and Loan Association
+The First National Bank of Monterey
+DeMotte State Bank
+1st Source Bank
+First Merchants Bank
+First Bank of Berne
+Horizon Bank
+First Federal Savings Bank
+Alliance Bank
+The Friendship State Bank
+The Napoleon State Bank
+FCN Bank, National Association
+First Savings Bank
+Greenville National Bank
+Merchants Bank of Indiana
+Farmers and Mechanics Federal Savings Bank
+Owen County State Bank
+Springs Valley Bank & Trust Company
+Mid-Southern Savings Bank, FSB
+Spencer County Bank
+Freedom Bank
+The First National Bank of Carmi
+The Fountain Trust Company
+CentreBank
+Peoples Community Bank SB of Monticello, Indiana
+Bank of Wolcott
+Eastern Michigan Bank
+Exchange State Bank
+Thumb Bank and Trust
+Independent Bank
+Bay Port State Bank
+Northstar Bank
+Tri-County Bank
+The Port Austin State Bank
+Isabella Bank
+Mercantile Bank
+Huron Community Bank
+Mayville State Bank
+Sturgis Bank & Trust Company
+First State Bank of Decatur
+Highpoint Community Bank
+Kalamazoo County State Bank
+Eaton Community Bank
+Lake-Osceola State Bank
+ChoiceOne Bank
+West Shore Bank
+The Shelby State Bank
+Alden State Bank
+Honor  Bank
+Citizens National Bank of Cheboygan
+Charlevoix State Bank
+The First National Bank of St. Ignace
+Central Savings Bank
+Nicolet National Bank
+State Savings Bank
+Old Mission Bank
+Huron State Bank
+Peoples State Bank of Munising
+The State Savings Bank of Manistique
+Superior National Bank
+Gogebic Range Bank
+The First National Bank of Wakefield
+Northern Interstate Bank, N. A.
+The Miners State Bank
+First National Bank & Trust Co.
+IncredibleBank
+Rolling Hills Bank & Trust
+United Bank and Trust Company
+FNB Bank
+First Whitney Bank and Trust
+First Interstate Bank
+TS Bank
+Audubon State Bank
+Crawford County Trust and Savings Bank
+Midwest Heritage Bank, FSB
+United Bank of Iowa
+Corydon State Bank
+County Bank
+Grinnell State Bank
+Lincoln Savings Bank
+Security State Bank
+Green Belt Bank & Trust
+GNB Bank
+Iowa Falls State Bank
+Heartland Bank
+Home State Bank
+Availa Bank
+BTC Bank
+American State Bank
+Farmers Bank of Northern Missouri
+Twin Cedars Bank
+Peoples Savings Bank
+Montezuma State Bank
+First National Bank, Ames, Iowa
+Security Savings Bank
+Hardin County Savings Bank
+TruBank
+Farmers Trust and Savings Bank
+Iowa State Bank
+NSB Bank
+Manufacturers Bank & Trust Company
+Clear Lake Bank and Trust Company
+Reliance State Bank
+First Bank Hampton
+First Security Bank and Trust Company
+CUSB Bank
+The Home Trust & Savings Bank
+St. Ansgar State Bank
+West Iowa Bank
+Bank Midwest
+NorthStar Bank
+Fidelity Bank & Trust
+The Citizens First National Bank of Storm Lake
+Iowa Trust & Savings Bank
+Bank Iowa
+Bank Plus
+Pocahontas State Bank
+WCF Financial Bank
+Farmers Savings Bank
+Northeast Security Bank
+Maynard Savings Bank
+BankIowa
+Luana Savings Bank
+Community Bank of Oelwein
+MidWestOne Bank
+Farmers Savings Bank & Trust
+Chelsea Savings Bank
+PCSB Bank
+Iowa State Savings Bank
+The First National Bank in Creston
+State Bank of Brooks
+Houghton State Bank
+City State Bank
+Farmers and Merchants State Bank
+The Security National Bank of Sioux City, Iowa
+The Shelby County State Bank
+Cherokee State Bank
+Rivers Edge Bank
+Midstates Bank, National Association
+American Bank, National Association
+Primebank
+BankFirst
+Northwestern Bank
+State Bank of Schaller
+Sloan State Bank
+Ashton State Bank
+Frontier Bank
+The First National Bank of Primghar
+Savings Bank
+Sanborn Savings Bank
+Sibley State Bank
+Iowa Savings Bank
+Westside State Bank
+Defiance State Bank
+Farmers Trust & Savings Bank
+First Heritage Bank
+Cornerstone Bank
+Tri-Valley Bank
+Arbor Bank
+Glenwood State Bank
+Maquoketa State Bank
+Bellevue State Bank
+Central State Bank
+FreedomBank
+Peoples State Bank
+Farmers & Merchants Savings Bank
+The Clinton National Bank
+Waukon State Bank
+Decorah Bank & Trust Company
+Kerndt Brothers Savings Bank
+Elgin State Bank
+Interstate Federal Savings and Loan Association of McGregor
+New Albin Savings Bank
+Bank 1st
+Fairfax State Savings Bank
+Ohnward Bank & Trust
+Heritage Bank
+Dysart State Bank
+The Libertyville Savings Bank
+American Trust and Savings Bank
+Keystone Savings Bank
+Bridge Community Bank
+White State Bank
+The State Bank of Toledo
+South Ottumwa Savings Bank
+First Iowa State Bank
+Success Bank
+Iowa Trust and Savings Bank
+Federation Bank
+State Central Bank
+Mediapolis Savings Bank
+Bank
+Wayland State Bank
+Two Rivers Bank & Trust
+Pilot Grove Savings Bank
+Danville State Savings Bank
+Community Bank and Trust Company
+State Bank of Wapello
+Liberty Trust & Savings Bank
+Washington State Bank
+Woodford State Bank
+The First National Bank and Trust Company
+Mound City Bank
+First National Bank at Darlington
+Royal Bank
+Richland County Bank
+The Peoples Community Bank
+Community First Bank
+Clare Bank, National Association
+The Benton State Bank
+One Community Bank
+National Exchange Bank and Trust
+Bank of Mauston
+Horicon Bank
+Ergo Bank
+Fortifi Bank
+Bremer Bank, National Association
+Citizens State Bank of La Crosse
+The First Bank of Baldwin
+First National Community Bank
+Hiawatha National Bank
+First Resource Bank
+Laona State Bank
+Bank of Luxemburg
+North Shore Bank
+Associated Bank, National Association
+AbbyBank
+Banner Banks
+Forward Bank
+Citizens State Bank of Loyal
+Prevail Bank
+Unity Bank
+Nekoosa Port Edwards State Bank
+KeySavings Bank
+Northern State Bank
+Great North Bank
+Chippewa Valley Bank
+Headwaters State Bank
+Community Financial Bank
+Bank of Alma
+Security Financial Bank
+First National Bank & Trust Company
+Waumandee State Bank
+Black River Country Bank
+Bank of Cashton
+River Bank
+Citizens Community Federal National Association
+Bluff View Bank
+Bank of Ontario
+Farmers and Merchants Bank of Kendall
+American Bank of Beaver Dam
+Citizens First Bank
+Park Bank
+State Bank Financial
+Bank First, N.A.
+Sterling Bank
+Security Bank
+Independence State Bank
+Oakwood Bank
+Dairy State Bank
+Johnson Bank
+Shell Lake State Bank
+Community Bank of Cameron
+Cumberland Federal Bank, FSB
+Frandsen Bank & Trust
+Ladysmith Federal Savings and Loan Association
+Pioneer Bank of Wisconsin
+The Farmers & Merchants Bank
+Fox Valley Savings Bank
+Premier Community Bank
+The Farmers State Bank of Waupaca
+Hometown Bank
+Wolf River Community Bank
+The Portage County Bank
+Northview Bank
+Woodlands National Bank
+Neighborhood National Bank
+Northwoods Bank of Minnesota
+Stearns Bank National Association
+Arlington State Bank
+CenBank
+Perennial Bank
+Farmers and Merchants State Bank of Pierz
+The First National Bank of Fairfax
+Franklin State Bank
+First National Bank Minnesota
+ProGrowth Bank
+Minnwest Bank
+Cornerstone State Bank
+Center National Bank
+MidCountry Bank
+Security Bank & Trust Company
+Citizens Bank Minnesota
+Security State Bank of Aitkin
+Grand Marais State Bank
+Woodland Bank
+Grand Timber Bank
+Merchants Bank, National Association
+First Bank Blue Earth
+Triumph State Bank
+State Bank of Easton
+Frost State Bank
+HomeTown  Bank
+First State Bank of Le Center
+Janesville State Bank
+Global Innovations Bank
+State Bank of New Richland
+The First National Bank at St. James
+Red Rock Bank
+Keen Bank, National Association
+United Prairie Bank
+Peoples State Bank of Wells
+First Financial Bank in Winnebago
+Farmers and Merchants State Bank of Alpha
+State Bank of Chandler
+Currie State Bank
+First State Bank Southwest
+First Security Bank-Hendricks
+Security Bank Midwest
+Jackson Federal Savings and Loan Association
+State Bank of Jeffers
+First Security Bank - Canby
+Worthington Federal Savings Bank, FSB
+First Security Bank - Sleepy Eye
+First Farmers & Merchants National Bank
+Odin State Bank
+First Bank & Trust
+First Independent Bank
+Integrity Bank Plus
+Prairie Sun Bank
+Farmers and Merchants State Bank of Appleton
+State Bank of Bellingham
+RiverWood Bank
+State Bank of Danvers
+Citizens Alliance Bank
+FM Bank
+Star Bank
+Grove Bank
+Community Development Bank, FSB
+Kensington Bank
+Financial Security Bank
+Farmers and Merchants State Bank of Springfield
+Dacotah Bank
+The Wanda State Bank
+State Bank of Wheaton
+VIKING BANK, NATIONAL ASSOCIATION
+Hometown Community Bank
+Eagle Bank
+Glenwood State Bank (Incorporated)
+Farmers State Bank of Hoffman
+Pine Country Bank
+Minnesota National Bank
+Mid-Central National Bank
+American Heritage National Bank
+Lowry State Bank
+First State Bank of Swanville
+Stearns Bank Upsala National Association
+First National Bank North
+COMMUNITY FIRST BANK
+First International Bank & Trust
+The Citizens National Bank of Park Rapids
+Randall State Bank
+Wadena State Bank
+American National Bank of Minnesota
+Midwest Bank
+Bell Bank
+American Federal Bank
+The Gary State Bank
+Red River State Bank
+Northwestern Bank, National Association
+State Bank of Lake Park
+United Valley Bank
+The First National Bank of Bagley
+Border Bank
+The Northern State Bank of Gonvick
+Deerwood Bank
+Northern State Bank of Thief River Falls
+American State Bank of Grygla
+Prime Security Bank
+KodaBank
+Marshall County State Bank
+Security State Bank of Oklee
+Ultima Bank Minnesota
+Dakota Heritage Bank
+Citizens State Bank of Roseau
+Security State Bank of Warroad
+BankWest, Inc.
+The First National Bank in Sioux Falls
+CorTrust Bank National Association
+Merchants State Bank
+First PREMIER Bank
+Campbell County Bank, Inc.
+The Farmers and Merchants State Bank
+Citizens State Bank, of Arlington
+DNB NATIONAL BANK
+American Bank & Trust
+Great Plains Bank
+First Fidelity Bank
+First Dakota National Bank
+Quoin Financial Bank
+Heartland State Bank
+Andes State Bank
+Commercial State Bank, of Wagner
+First National Bank of Omaha
+Plains Commerce Bank
+First State Bank of Roscoe
+The Farmers State Bank of Turton
+Dakota Prairie Bank
+Security First Bank
+Sunrise Bank Dakota
+First National Bank in Philip
+1st Financial Bank USA
+State Bank of Eagle Butte
+Western Dakota Bank
+Pioneer Bank & Trust
+BankNorth
+Stock Growers Bank
+The Goose River Bank
+Bank Forward
+First United Bank
+Citizens State Bank of Lankin
+Bravera Bank
+Choice Financial Group
+Aspire Bank
+Horizon Financial Bank
+The Farmers & Merchants Bank of North Dakota
+Gate City Bank
+Western State Bank
+Turtle Mountain State Bank
+First State Bank of Cando
+First National Bank and Trust Co. of Bottineau
+State Bank of Bottineau
+Starion Bank
+First State Bank of Harvey
+State Bank of Lakota
+United Community Bank of North Dakota
+Rolette State Bank
+Merchants Bank
+McIntosh County Bank
+First Security Bank - West
+Unison Bank
+The Union Bank
+Union State Bank of Hazen
+Grant County State Bank
+BNC National Bank
+TruCommunity Bank
+Bank of Hazelton
+Dakota Community Bank & Trust, National Association
+Strasburg State Bank
+First State Bank of Golva
+Dakota Western Bank
+Commercial Bank of Mott
+First State Bank & Trust
+The Bank of Tioga
+The Citizens State Bank at Mohall
+Liberty State Bank
+Opportunity Bank of Montana
+Citizens Bank & Trust Company
+American Bank
+Bank of The Rockies
+Little Horn State Bank
+Stockman Bank of Montana
+First Security Bank of Roundup
+Garfield County Bank
+Independence Bank
+Bank of Bridger, National Association
+Rocky Mountain Bank
+The Yellowstone Bank
+The Bank of Baker
+Summit National Bank
+First State Bank of Forsyth
+Native American Bank, National Association
+Glacier Bank
+HeritageBank
+The First State Bank of Shelby
+The First State Bank of Malta
+First Montana Bank, Inc.
+Pioneer Federal Savings and Loan Association
+Peoples Bank of Deer Lodge
+First Security Bank of Deer Lodge
+The Bank of Commerce
+Madison Valley Bank
+Valley Bank of Ronan
+TrailWest Bank
+Granite Mountain Bank Inc dba Granite Mountain Bank
+Valley Bank of Kalispell
+Old Second National Bank
+Iroquois Farmers State Bank
+Buckley State Bank
+Federated Bank
+Frederick Community Bank, The
+Iroquois Federal Savings and Loan Association
+The First Trust and Savings Bank of Watseka, Illinois
+First Trust Bank of Illinois
+Bank of Gibson City
+Heartland Bank and Trust Company
+Prospect Bank
+Vermilion Valley Bank
+Farmers-Merchants Bank of Illinois
+Milford Building and Loan Association
+Citizens State Bank of Milford
+First State Bank of Forrest
+Apple River State Bank
+TBK BANK, SSB
+Illinois Bank & Trust
+Milledgeville State Bank
+The State Bank of Pearl City
+Savanna-Thomson State Bank
+First Savanna Savings Bank
+First State Bank Shannon-Polo
+Lena State Bank
+Farmers State Bank of Western Illinois
+CBI Bank & Trust
+Community National Bank in Monmouth
+Fortress Bank
+Morton Community Bank
+The Havana National Bank
+De Witt Savings Bank
+Arcola First Bank
+First Mid Bank & Trust, National Association
+First Neighbor Bank, National Association
+FIRST NATIONAL BANK OF NOKOMIS
+Scott State Bank
+Longview Bank
+Longview Bank and Trust
+First Community Bank of Moultrie County
+TrustBank
+Villa Grove State Bank
+First Federal Savings and Loan Association of Central Illinois, S.B.
+Shelby County State Bank
+CNB Bank and Trust, N.A.
+Carrollton Bank
+Security National Bank
+Bank of Hillsboro, National Association
+First Community Bank of Hillsboro
+Bank & Trust Company
+The Litchfield National Bank
+The First National Bank of Litchfield
+Nokomis Savings Bank
+The FNB Community Bank
+Peoples Bank & Trust
+Buena Vista National Bank
+Dieterich Bank
+Chester National Bank
+First State Bank of Campbell Hill
+North County Savings Bank
+The Farmers and Merchants National Bank of Nashville
+Community Trust Bank
+Nashville Savings Bank
+Oakdale State Bank
+The Old Exchange National Bank of Okawville
+The First National Bank of Okawville
+First National Bank of Steeleville
+First National Bank in Pinckneyville
+Murphy-Wall State Bank and Trust Company
+The First National Bank of Sparta
+LIBERTY BANK
+Great Rivers Bank
+Farmers National Bank of Griggsville
+Beardstown Savings s.b.
+Farmers State Bank & Trust Co.
+Bank of Kampsville
+The First National Bank of Allendale
+Citizens National Bank of Albion
+The Peoples State Bank of Newton, Illinois
+The First National Bank of Brownstown
+Casey State Bank
+Preferred Bank
+Farmers & Merchants Bank of Hutsonville
+First National Bank in Olney
+First Robinson Savings Bank, National Association
+Sainte Marie State Bank
+Teutopolis State Bank
+First National Bank of Waterloo
+Midland States Bank
+Prairie State Bank and Trust
+The First National Bank of Raymond
+The First National Bank of Arenzville
+West Central Bank
+The First National Bank of Beardstown
+Community Bank of Easton
+Petefish, Skiles & Co.
+Alliance Community Bank
+Mason City National Bank
+Rushville State Bank
+Marine Bank
+First Bankers Trust Company, National Association
+Legence Bank
+State Bank of Whittington
+Peoples National Bank , N.A.
+Banterra Bank
+The Clay City Banking Co.
+Du Quoin State Bank
+The Fairfield National Bank
+Flora Bank & Trust
+First Community Bank, Xenia-Flora
+Community Partners Savings Bank
+Clay County State Bank
+Wabash Savings Bank
+First State Bank of St. Peter
+Southern Illinois Bank
+Farmers State Bank of Alto Pass, Ill.
+The Anna -Jonesboro National Bank
+Anna State Bank
+The First State Bank of Dongola
+Grand Rivers Community Bank
+First State Bank of Olmsted
+The Central Trust Bank
+Peoples Savings Bank of Rhineland
+HNB National Bank
+Community State Bank of Missouri
+HomeBank
+Peoples Bank & Trust Co.
+Jonesburg State Bank
+The Mercantile Bank of Louisiana, Missouri
+American Bank of Missouri
+The Bank of Missouri
+Neighbors Bank
+MA Bank
+Alliant Bank
+United State Bank
+TPNB Bank
+Exchange Bank of Northeast Missouri
+Bank of New Cambria
+The Citizens Bank of Edina
+farmbank
+Bank of Kirksville
+Northeast Missouri State Bank
+First State Community Bank
+Community Bank of Memphis
+Verimore Bank
+Putnam County State Bank
+Bank of Brookfield - Purdin, National Association
+Peoples Community Bank
+Belgrade State Bank
+Bloomsdale Bank
+New Era Bank
+Ozarks Federal Savings and Loan Association
+UNICO Bank
+MRV Banks
+The Bank of Advance
+Peoples Bank of Altenburg
+Enterprise Bank & Trust
+Focus Bank
+First State Bank and Trust Company, Inc.
+Citizens' Bank of Charleston
+First Missouri Bank of SEMO
+First Midwest Bank of Dexter
+Bank of New Madrid
+Bank of Grandin
+First Midwest Bank of the Ozarks
+Bank Northwest
+Independent Farmers Bank
+The Nodaway Valley Bank
+Citizens Bank & Trust
+Wells Bank
+NBH Bank
+Chillicothe State Bank
+Investors Community Bank
+UMB Bank, National Association
+Regional Missouri Bank
+Carroll County Trust Company of Carrollton, Missouri
+Bank 21
+Home Savings and Loan Association of Carroll County, F.A.
+Goppert Financial Bank
+St. Clair County State Bank
+Hawthorn Bank
+Oakstar Bank
+Equity Bank
+Legacy Bank & Trust Company
+Community National Bank & Trust
+Mid-Missouri Bank
+Community Bank of El Dorado Springs
+Lamar Bank and Trust Company
+Arvest Bank
+Metz Banking Company
+Montrose Savings Bank
+The First National Bank of Nevada, Missouri
+Sherwood Community Bank
+Community Bank and Trust
+The Corner Stone Bank
+Security Bank of Southwest Missouri
+Legends Bank
+Mid America Bank
+The Maries County Bank
+Heritage Bank of the Ozarks
+The Bank of Versailles
+Citizens Bank of Eldon
+Bank of St. Elizabeth
+Concordia Bank of Concordia, Missouri
+The Missouri Bank
+Patriots Bank
+First Bank of the Lake
+The Citizens-Farmers Bank of Cole Camp
+SULLIVAN BANK
+Community Point Bank
+The Merchants and Farmers Bank of Salisbury
+Alton Bank
+Town & Country Bank
+FCNB Bank
+Security Bank of the Ozarks
+Progressive Ozark Bank
+West Plains Bank and Trust Company
+The Bank of Houston
+Bank of Iberia
+Bank of Salem
+Freedom Bank of Southern Missouri
+HomePride Bank
+Stockmens Bank
+Century Bank of the Ozarks
+First State Bank of Purdy
+Commerce Bank
+CS Bank
+Table Rock Community Bank
+Generations Bank
+Bank of Billings
+FNBC Bank
+Community First Banking Company
+Old Missouri Bank
+Limebank
+Goppert State Service Bank
+The Farmers State Bank of Blue Mound
+Bank of Greeley
+Landmark National Bank
+The Farmers State Bank of Aliceville, Kansas
+The State Bank of Bern
+United Bank & Trust
+The Citizens State Bank and Trust Company
+The Union State Bank of Everest
+First National Bank in Frankfort
+Citizens State Bank and Trust Company
+GNBank, National Association
+Bank of Blue Valley
+First Option Bank
+The Citizens State Bank
+Elk State Bank
+Western National Bank
+The Liberty Savings Association, FSA
+The City State Bank
+American Bank of Baxter Springs
+The Baxter State Bank
+Home Savings Bank
+Emprise Bank
+The Exchange State Bank of St. Paul, Kansas
+Labette Bank
+FirstOak Bank
+First National Bank in Fredonia
+The Piqua State Bank
+CBW Bank
+Central National Bank
+First National Bank of Kansas
+Farmers and Drovers Bank
+Cottonwood Valley Bank
+The Marion National Bank
+The Tampa State Bank
+Vintage Bank Kansas
+Bank of the Flint Hills
+The Citizens National Bank
+Astra Bank
+New Century Bank
+Guaranty State Bank and Trust Company
+Kaw Valley State Bank and Trust Company
+Swedish-American State Bank
+Farmers National Bank
+The State Exchange Bank
+First National Bank and Trust
+FNB Washington
+Kanza Bank
+Bank of Commerce and Trust Company
+Heartland Tri-State Bank
+The Howard State Bank, Howard, Kansas
+The Bank of Protection
+NINNESCAH VALLEY BANK
+Home Bank and Trust Company
+Centera Bank
+SJN Bank of Kansas
+The Haviland State Bank
+Citizens Bank of Kansas
+Alva State Bank & Trust Company
+Conway Bank
+Fusion Bank
+The First National Bank of Sedan
+First Bank Kansas
+The Solomon State Bank
+The Bennington State Bank
+First Bank of Beloit
+The Wilson State Bank
+Lyons Federal Bank
+State Bank of Downs
+Citizens State Bank and Trust Co., Ellsworth, Kansas
+The Dickinson County Bank
+The First National Bank of Hope
+Bank of Holyrood
+The Bank of Tescott
+Peoples Bank and Trust Company
+The Riley State Bank of Riley, Kansas
+Sunflower Bank, National Association
+Farmers Bank & Trust
+Bison State Bank
+Bank of Hays
+The First State Bank
+The First State Bank of Ransom
+Prairie Bank of Kansas
+The Alden State Bank
+SOLUTIONS NORTH BANK
+The Gorham State Bank
+The Bank
+Southwind Bank
+The Western State Bank
+Farmers & Merchants Bank of Colby
+Adams Bank & Trust
+BANKWEST OF KANSAS
+The Farmers State Bank of Oakley, Kansas
+KansasLand Bank
+The Eastern Colorado Bank
+The Stockgrowers State Bank of Ashland, Kansas
+The First National Bank in Cimarron
+Integrity Bank
+Bank 7
+The First National Bank of Dighton
+The First State Bank of Healy
+Dream First Bank, National Association
+Johnson State Bank
+The Plains State Bank
+The First National Bank of Scott City
+The Valley State Bank
+First FarmBank
+Grant County Bank
+First Bank of Bancroft
+First Nebraska Bank
+First Northeast Bank of Nebraska
+CHARTER WEST BANK
+Washington County Bank
+Auburn State Bank
+Union Bank and Trust Company
+The First National Bank of Johnson
+Bruning Bank
+FirstBank of Nebraska
+Countryside Bank
+City Bank & Trust Co.
+First State Bank Nebraska
+State Bank of Odell
+State Bank of Table Rock
+American National Bank
+First Bank of Utica
+York State Bank
+Thayer County Bank
+Henderson State Bank
+Commercial State Bank
+First Tri County Bank
+The Bank of Steinauer
+Riverstone Bank
+Tecumseh Federal Bank
+Homestead Bank
+Madison County Bank
+Bank of the Valley
+Cedar Rapids State Bank
+Clarkson Bank
+Bank of Elgin
+Points West Community Bank
+First Bank and Trust of Fullerton
+Great Plains State Bank
+Nebraska Bank
+The Tri-County Bank
+Sandhills State Bank
+Farmers and Merchants State Bank, Bloomfield, Nebraska
+Nebraska State Bank
+Brunswick State Bank
+Butte State Bank
+Chambers State Bank
+Cedar Security Bank
+Bank of Hartington
+Bank of Orchard
+West Plains Bank
+State Nebraska Bank & Trust
+Elkhorn Valley Bank & Trust
+Flatwater Bank
+Nebraska State Bank and Trust Company
+Custer Federal State Bank
+Pathway Bank
+First National Bank in Ord
+State Bank of Scotia
+Banner Capital Bank
+First Central Bank
+South Central State Bank
+Waypoint Bank
+Home Federal Savings and Loan Association of Grand Island
+Lincoln FSB of Nebraska
+FirsTier Bank
+MNB BANK
+First Central Bank McCook
+The Culbertson Bank
+Western Nebraska Bank
+The Potter State Bank of Potter
+Bank of Lewellen
+Sidney Federal Savings and Loan Association
+Platte Valley Bank
+The First National Bank of Gordon
+JD Bank
+Sabine State Bank and Trust Company
+The Evangeline Bank and Trust Company
+Gibsland Bank & Trust Company
+Louisiana National Bank
+BOM Bank
+American Bank & Trust Company
+Bank of Coushatta
+Franklin State Bank & Trust Company
+Commercial Capital Bank
+Guaranty Bank & Trust Company of Delhi, Louisiana
+Hodge Bank & Trust Company
+Jackson Parish Bank
+Jonesboro State Bank
+Delta Bank
+Winnsboro State Bank & Trust Company
+Caldwell Bank & Trust Company
+Currency Bank
+b1BANK
+Cross Keys Bank
+Citizens Progressive Bank
+Tensas State Bank
+Sicily Island State Bank
+Progressive Bank
+Cottonport Bank
+CLB The Community Bank
+Southern Heritage Bank
+Homeland Federal Savings Bank
+Simmesport State Bank
+Red River Bank
+Community Bank of Louisiana
+First Federal Bank of Louisiana
+Bank of Winnfield & Trust Company
+McGehee Bank
+Century Next Bank
+First Service Bank
+First Naturalstate Bank
+Connect Bank
+Merchants and Farmers Bank
+Warren Bank and Trust Company
+First State Bank of Warren
+Bank of Lake Village
+Union Bank & Trust Company
+Commercial Bank & Trust Company
+Home Bank of Arkansas
+Relyance Bank, National Association
+FBT Bank & Mortgage
+Riverside Bank
+COMMUNITY STATE BANK
+Farmers Bank & Trust Company
+Diamond Bank
+First State Bank of DeQueen
+Horatio State Bank
+The First National Bank of Tom Bean
+Bodcaw Bank
+Bank of Delight
+The Union Bank of Mena
+Chambers Bank
+Riverwind Bank
+Cross County Bank
+Signature Bank of Arkansas
+The Merchants & Planters Bank
+First Arkansas Bank and Trust
+Merchants & Planters' Bank
+Stone Bank
+Eagle Bank and Trust Company
+First National Bank of Eastern Arkansas
+Petit Jean State Bank
+Armor Bank
+Evolve Bank & Trust
+Partners Bank
+RiverBank
+The First National Bank of Lawrence County at Walnut Ridge
+Bank of Cave City
+Piggott State Bank
+The First National Bank of Izard County
+Bank of 1889
+Anstaff Bank
+The First National Bank at Paris
+Logan County Bank
+First Western Bank
+MidFirst Bank
+Shamrock Bank, N.A.
+The First National Bank and Trust Co., Chickasha, Oklahoma
+Vision Bank
+The Pauls Valley National Bank
+Bank of Hydro
+Washita Valley Bank
+Bank of Western Oklahoma
+First National Bank and Trust Company of Weatherford
+American Exchange Bank, Lindsay, Oklahoma
+The First National Bank of Lindsay
+International Bank of Commerce
+First Bank & Trust Company
+Exchange Bank and Trust Company
+BancFirst
+First National Bank and Trust Company of Ardmore
+The State Bank of Wynnewood
+Ameristate Bank
+Frazer Bank
+Cattlemens Bank
+First National Bank and Trust Company
+Great Plains National Bank
+First Summit Bank
+All America Bank
+The First Farmers National Bank of Waurika
+First Bank & Trust Co.
+Washita State Bank
+High Plains Bank
+BANK360
+InterBank
+The Bank of the West
+Community State Bank of Canton
+THE SEILING STATE BANK
+BancCentral, National Association
+Cleo State Bank
+ACB Bank
+Gateway First Bank
+The Farmers and Merchants National Bank of Fairview
+Community National Bank of Okarche
+Fairview Savings and Loan Association
+The Bank of Kremlin
+The Hopeton State Bank
+NBC OKLAHOMA
+F & M Bank
+First National Bank in Okeene
+The First State Bank of Pond Creek, Oklahoma
+Oklahoma State Bank
+Bank of Vici
+COREBANK
+The Bank of Beaver City
+The First Security Bank
+Regent Bank
+Welch State Bank of Welch, Okla.
+RCB Bank
+Carson Community Bank
+American Bank of Oklahoma
+Bank of Grand Lake
+Grand Savings Bank
+BOKF, National Association
+Bank of Locust Grove
+Fidelity Bank, National Association
+First Pryority Bank
+Lakeside Bank of Salina
+Armstrong Bank
+The Peoples National Bank of Checotah
+Bank of Eufaula
+The Central National Bank of Poteau
+The First National Bank of Stigler
+The Community State Bank
+Spiro State Bank
+First National Bank & Trust Company of McAlester
+Latimer State Bank
+First Texoma National Bank
+McCurtain County National Bank
+Security First National Bank of Hugo
+The Idabel National Bank
+Security State Bank of Oklahoma
+Sooner State Bank
+American Exchange Bank
+Oklahoma Heritage Bank
+Mabrey Bank
+The First National Bank and Trust Company of Okmulgee
+Wallis Bank
+Texas Bank and Trust Company
+The American National Bank of Texas
+Prosperity Bank
+The City National Bank of Sulphur Springs
+First State Bank of Ben Wheeler, Texas
+Mineola Community Bank, S.S.B.
+Austin Bank, Texas National Association
+Commercial Bank of Texas, National Association
+Guaranty Bank & Trust, N.A.
+State Bank of De Kalb
+First Federal Community Bank, SSB
+The First National Bank in Cooper
+Legend Bank, N.A.
+Third Coast Bank, SSB
+The First National Bank of East Texas
+The First National Bank of Winnsboro
+The First National Bank of Hughes Springs
+Texana Bank, National Association
+Texas Heritage National Bank
+First State Bank and Trust Company
+VeraBank, National Association
+BTH Bank, National Association
+The First National Bank of Trinity
+Cypress Bank, SSB
+Southside Bank
+Community National Bank & Trust of Texas
+First National Bank of Huntsville
+Citizens National Bank
+Alliance Bank Central Texas
+Incommons Bank, N.A.
+Dominion Bank
+Lovelady State Bank
+Shelby Savings Bank, SSB
+Allegiance Bank
+First National Bank of Jasper
+Wellington State Bank
+The Jacksboro National Bank
+Sanger Bank
+Farmers State Bank of Newcastle
+Herring Bank
+Graham Savings and Loan, SSB
+The First National Bank of Albany
+Ciera Bank
+TexasBank
+First National Bank of Dublin
+First National Bank Texas
+MCBank
+The Buckholts State Bank
+Classic Bank, National Association
+Extraco Banks, National Association
+First Security State Bank
+First National Bank of Bosque County
+The Citizens National Bank of Hillsboro
+First National Bank of Central Texas
+Keystone Bank, SSB
+The First National Bank of Ballinger
+The Commercial National Bank of Brady
+The Brady National Bank
+Coleman County State Bank
+Texas Financial Bank
+Junction National Bank
+Mason Bank
+Menard  Bank
+West Texas State Bank
+Arrowhead Bank
+The City National Bank of San Saba
+The Santa Anna National Bank
+American Momentum Bank
+The First National Bank of Sterling City
+The First National Bank of Eldorado
+Ozona Bank
+Crockett National Bank
+Robert Lee State Bank
+The First National Bank of Sonora
+The Bank and Trust, S.S.B.
+The Bank of San Jacinto County, Coldspring, Texas
+The First National Bank of Livingston
+The First National Bank of Eagle Lake
+Zions Bancorporation, N.A.
+The First National Bank of Anderson
+First State Bank of Bedias
+Normangee State Bank
+The First National Bank of Shiner
+TrustTexas Bank, SSB
+R Bank
+NewFirst National Bank
+Peoples State Bank of Hallettsville
+SouthStar Bank, S.S.B.
+Crossroads Bank
+Sage Capital Bank,
+The Yoakum National Bank
+Stockmens National Bank in Cotulla
+SouthTrust Bank, N.A.
+Texas Champion Bank
+First State Bank of Texas
+The Falls City National Bank
+The Karnes County National Bank of Karnes City
+Texas Regional Bank
+The First National Bank in Falfurrias
+Greater State Bank
+Bank of South Texas
+The First National Bank of Hebbronville
+Vantage Bank Texas
+Security State Bank & Trust
+TXN Bank National Association
+Lone Star Capital Bank, National Association
+Llano National Bank
+First State Bank of Burnet
+Johnson City Bank
+FirstCapital Bank of Texas, National Association
+ValueBank Texas
+First State Bank of Uvalde
+Zavala County Bank
+PrimeBank of Texas
+Carmine State Bank
+Lone Star Bank
+Columbus State Bank
+Industry State Bank
+Fayetteville Bank
+Fayette Savings Bank, SSB
+First National Bank of Giddings
+Round Top State Bank
+National Bank & Trust
+Hill Bank & Trust Co.
+SNB Bank, National Association
+FirstBank Southwest
+Dalhart Federal Savings & Loan Association, SSB
+First National Bank of Hereford
+Western Bank
+Kress National Bank
+Interstate Bank
+The Perryton National Bank
+BOC Bank
+Anchor D Bank
+The First National Bank of Quitaque
+Pilgrim Bank
+American National Bank & Trust
+The Donley County State Bank
+Crowell State Bank
+First Texas National Bank
+First Bank and Trust of Memphis
+First Capital Bank
+Texas Republic Bank, National Association
+Lone Star State  Bank of West Texas
+Sundown State Bank
+West Texas National Bank
+First Federal Bank Littlefield, Texas
+City Bank
+Plains State Bank
+Spur Security Bank
+The First National Bank of Aspermont
+The City National Bank of Colorado City
+Haskell National Bank
+Vista Bank
+Bank of Texas
+Fort Davis State Bank
+The Pecos County State Bank
+First National Bank of Fort Stockton
+Tejas Bank
+Transpecos Banks, SSB
+Big Bend Banks, N.A.
+United Business Bank
+HTLF Bank
+The First National Bank of Hugo
+The Pueblo Bank and Trust Company
+Mountain Valley Bank
+Equitable Savings and Loan Association
+The Farmers State Bank of Brush
+Bank of Colorado
+First Pioneer National Bank
+Wray State Bank
+The Bank of Burlington
+Fowler State Bank
+The First National Bank of Las Animas
+The State Bank
+The Colorado Bank and Trust Company of La Junta
+InBank
+McClave State Bank
+Century Savings and Loan Association
+The First National Bank in Trinidad
+5Star Bank
+First Southwest Bank
+RG Bank, A Savings and Loan Association
+San Luis Valley Federal Bank
+Alamosa State Bank
+Del Norte Bank
+High Country Bank
+The Gunnison Bank and Trust Company
+Gunnison Savings and Loan Association
+Kirkpatrick Bank
+Four Corners Community Bank
+The Dolores State Bank
+First National Bank, Cortez
+First Colorado National Bank
+Alpine Bank
+The Citizens State Bank of Ouray
+ANB Bank
+Lusk State Bank
+Pinnacle Bank - Wyoming
+RNB STATE BANK
+Big Horn Federal Savings Bank
+Central Bank and Trust
+The Converse County Bank
+Hilltop National Bank
+First Northern Bank of Wyoming
+Buffalo Federal Bank
+First Western Trust Bank
+Bank of Jackson Hole
+Bank of Star Valley
+Ireland Bank
+Columbia State Bank
+Umpqua Bank
+Banner Bank
+Idaho First Bank
+Washington Federal Bank
+bankcda
+State Bank of Southern Utah
+Cache Valley Bank
+Utah Independent Bank
+Horizon Community Bank
+New Mexico Bank & Trust
+Farmers & Stockmens Bank
+Citizens Bank of Las Cruces
+Bank of the Southwest
+The Citizens Bank of Clovis
+Tucumcari Federal Savings and Loan Association
+Nevada Bank and Trust Company
+The First National Bank of Ely
+Oak Valley Community Bank
+El Dorado Savings Bank, F.S.B.
+MUFG Union Bank, National Association
+Bank of Stockton
+Westamerica Bank
+Bank of Marin
+Tri Counties Bank
+Plumas Bank
+ANZ Guam, Inc.
+Bank of Guam
+Bank of Hawaii
+BankPacific, Ltd
+Finance Factors, Ltd.
+Bank of the Federated States of Micronesia
+Bank of Eastern Oregon
+Oregon Coast Bank
+SAVIBANK
+Kitsap Bank
+1st Security Bank of Washington
+Sound Community Bank
+First Fed Bank
+Raymond Federal Bank
+Bank of the Pacific
+Riverview Community Bank
+Wheatland Bank
+Bank of Idaho
+First National Bank Alaska
+Northrim Bank
+Mt. McKinley Bank
+Denali State Bank
+Citizens Bank of Ada
+Farmers State Bank, Allen, Oklahoma
+First American Bank
+South Story Bank & Trust
+VISIONBANK OF IOWA
+Bankers Trust Company
+Boone Bank & Trust Co.
+Fidelity Bank
+Maxwell State Bank
+State Bank & Trust Co.
+Home Federal Bank
+Washington Trust Bank
+Summit Bank
+Stride Bank, National Association
+The Security National Bank of Enid
+The City National Bank and Trust Company of Lawton, Oklahoma
+Marquette Savings Bank
+The Andover Bank
+First Kansas Bank
+Golden Belt Bank, FSA
+Territorial Savings Bank
+HomeStreet Bank
+American Savings Bank, FSB
+Central Pacific Bank
+Hawaii National Bank
+The Citizens National Bank of Bluffton
+Farmers & Merchants Bank of Central California
+First Republic Bank
+Poppy Bank
+Silicon Valley Bank
+Western Alliance Bank
+Signature Bank
+Capital Bank and Trust Company
+Meadows Bank
+Eaglemark Savings Bank
+Farm Bureau Bank FSB
+Greater Community Bank
+Centinel Bank of Taos
+Troy Bank & Trust Company
+First Cahawba Bank
+The First National Bank of Moody
+Security Bank of Crawford
+POINTWEST BANK
+The First National Bank of McGregor
+Community Bank & Trust, Waco, Texas
+Fidelity Bank of Texas
+1st Bank Yuma
+Academy Bank, National Association
+New York Community Bank
+Third Federal Savings and Loan Association of Cleveland
+The Middlefield Banking Company
+Portage Community Bank
+Westfield Bank, FSB
+The Farmers National Bank of Canfield
+The Apple Creek Banking Company
+Consumers National Bank
+Cf Bank, National Association
+First State Bank of San Diego
+Northfield Savings Bank
+Piedmont Federal Savings Bank
+Column National Association
+Golden Valley Bank
+Austin Capital Bank SSB
+Yampa Valley Bank
+Central Bank Illinois
+Sterling Federal Bank, F.S.B.
+Sauk Valley Bank & Trust Company
+The First National Bank in Amboy
+Community State Bank of Rock Falls
+Pioneer State Bank
+Flanagan State Bank
+Wilmington Savings Fund Society, FSB
+FSNB, National Association
+Artisans' Bank
+Oxford Bank
+Bank of Utah
+Grand Valley Bank
+LCA Bank Corporation
+The James Polk Stone Community Bank
+Western Commerce Bank
+Lea County State Bank
+PrimeSouth Bank
+Mascoma Bank
+Savings Bank of Walpole
+The First National Bank and Trust Company of Miami
+Method Bank
+Peoples State Bank of Velva
+First Western Bank & Trust
+State Bank & Trust of Kenmare
+Brannen Bank
+Millennium Bank
+Mainstreet Community Bank of Florida
+Cattaraugus County Bank
+Bank of Cattaraugus
+Hamlin Bank and Trust Company
+The Commercial Bank Of Ozark
+Friend Bank
+Commercial Bank & Trust Co.
+Lamar National Bank
+The Liberty National Bank in Paris
+Marion County State Bank
+Leighton State Bank
+Phelps County Bank
+Citizens Bank of the Midwest
+Pioneer Trust Bank, National Association
+Willamette Valley Bank
+People's Bank of Commerce
+American Heritage Bank
+SpiritBank
+AVB Bank
+The First National Bank and Trust Company of Broken Arrow
+FNB Coweta
+Blue Sky Bank
+1st Bank in Hominy
+First Oklahoma Bank
+First Bank of Owasso
+The Exchange Bank
+Oklahoma Capital Bank
+Triad Bank, National Association
+Grand Bank
+Vast Bank, National Association
+Chickasaw Community Bank
+Firstar Bank
+American Bank and Trust Company
+MapleMark Bank
+TIB National Association
+CrossFirst Bank
+Citizens 1st Bank
+Cendera Bank, National Association
+Texas National Bank of Jacksonville
+UBank
+Texas Bank
+Savings Bank of Mendocino County
+Arthur State Bank
+County National Bank
+Blissfield State Bank
+Bank Michigan
+AB&T
+Flint Community Bank
+Bank of Dawson
+The Campbell & Fetter Bank
+First Federal Savings Bank of Angola
+The Hocking Valley Bank
+Nelsonville Home and Savings
+Harmony Bank, National Association
+First State Bank of Brownsboro
+First Progressive Bank
+22nd State Bank
+Bank of Brewton
+The Garrett State Bank
+The Lyons National Bank
+Savannah Bank National Association
+Cayuga Lake National Bank
+The First National Bank of Groton
+United Farmers State Bank
+Home Federal Savings Bank
+Sterling State Bank
+First Farmers & Merchants State Bank
+First Farmers & Merchants State Bank of Grand Meadow
+First State Bank Minnesota
+Woodsville Guaranty Savings Bank
+Fannin Bank
+CapTex Bank
+Veritex Community Bank
+Amarillo National Bank
+D. L. Evans Bank
+First Federal Savings Bank of Twin Falls
+Bank of Bearden
+Jonah Bank of Wyoming
+The Peoples Bank Co.
+Mercer Savings Bank
+Osgood Bank
+The St. Henry Bank
+The Bank of Clovis
+Western Bank of Clovis
+First New Mexico Bank
+Western Heritage Bank
+ServisFirst Bank
+MidSouth Bank
+SunSouth Bank
+River Bank & Trust
+HNB First Bank
+The Samson Banking Company, Inc.
+The First National Bank of Hartford
+NEXTIER BANK, NATIONAL ASSOCIATION
+Mid Penn Bank
+Georgia First Bank
+Bank of Dudley
+Morris Bank
+Bank of Wrightsville
+The First National Bank in Marlow
+American Nation Bank
+BayVanguard Bank
+Davis Trust Company
+Tioga State Bank National Association
+United Security Bank
+Bank of the Sierra
+Central Valley Community Bank
+Citizens Business Bank
+Beneficial State Bank
+Murphy Bank
+Pacific Western Bank
+Balboa Thrift and Loan Association
+State Bank of India (California)
+Fresno First Bank
+Bank of the Panhandle
+The First National Bank of Hooker
+Ascent Bank
+Berkshire Bank
+The First National Bank of Dryden
+Bank of Walker County
+Southwest Missouri Bank
+People's Bank of Seneca
+Guaranty Bank
+Security Federal Savings Bank
+Community First Bank of Indiana
+The Lamesa National Bank
+The State National Bank of Big Spring
+Texas Community Bank
+Merchants and Planters Bank
+The First National Bank of Fletcher
+First State Bank in Temple
+Walters Bank and Trust Company
+Hometown Bank of Corbin, Inc.
+Forcht Bank, National Association
+Cumberland Valley National Bank & Trust Company
+The First National Bank of Manchester
+Angelina Savings Bank, SSB
+Farmers and Merchants State Bank of Bushnell
+Raritan State Bank
+State Bank of Industry
+MidAmerica National Bank
+Colchester State Bank
+The Fairmount State Bank
+The Fahey Banking Company
+The Richwood Banking Company
+Greenfield Banking Company
+FIDELITY BANK
+Citizens National Bank, N.A.
+Oakworth Capital Bank
+Commonwealth National Bank
+Bryant Bank
+Bank of Oak Ridge
+Origin Bank
+Marion State Bank
+The Mer Rouge State Bank
+The Murray Bank
+Bank of Cadiz and Trust Company
+Frost  Bank
+Southwest Bank
+Resource Bank, National Association
+The Granville National Bank
+La Salle State Bank
+Hometown National Bank
+Eureka Savings Bank
+State Bank of Cherry
+Grand Ridge National Bank
+North Central Bank
+Illini State Bank
+First State Bank of Van Orin
+Peoples National Bank of Kewanee
+Marseilles Bank
+OSB Community Bank
+American Commercial Bank & Trust, National Association
+Spring Valley City Bank
+Peru Federal Savings Bank
+Streator Home Savings Bank
+Citizens First State Bank of Walnut
+The Kansas State Bank
+Mid-America Bank
+FNB Oxford Bank
+Oxford University Bank
+First National Bank of Clarksdale
+Paragon Bank
+FIRST COMMERCIAL BANK
+Hickory Point Bank and Trust
+Tompkins State Bank
+Camp Grove State Bank
+Fairview State Banking Company
+Ipava State Bank
+Table Grove State Bank
+State Bank of Toulon
+Vermont State Bank
+Better Banks
+Bank of Farmington
+Goodfield State Bank
+Bank of Yates City
+The First National Bank of Lacon
+Busey Bank
+Princeville State Bank
+The First National Bank in Tremont
+CIBM Bank
+INB, National Association
+Bank of Pontiac
+American Bank of Commerce
+The Greenwood's State Bank
+Town Bank, National Association
+Tri City National Bank
+The Equitable Bank, S.S.B.
+Capitol Federal Savings Bank
+Blue Ridge Bank
+Community First Bank, Inc.
+Alliance Bank & Trust Company
+Peoples Federal Savings and Loan Association
+First National Bank in New Bremen
+The Peoples Savings and Loan Company
+Minster Bank
+First Bank Richmond
+The Bank of Clarendon
+Sutton Bank
+The Old Fort Banking Company
+First Bank of Ohio
+The Republic Banking Company
+The Croghan Colonial Bank
+First Federal Bank of Ohio
+Commercial Banking Company
+The Genoa Banking Company
+The Marblehead Bank
+The First National Bank of Bellevue
+First Federal Savings and Loan Association of Lorain
+The Metamora State Bank
+Waterford Bank, N.A.
+Buckeye State Bank
+Crescent Bank
+Signature Bank, National Association
+Kendall Bank
+Mutual Savings Association
+First State Bank and Trust
+The Stockgrowers State Bank
+Flint Hills Bank
+The First National Bank of Harveyville
+The Denison State Bank
+The Lyndon State Bank
+The Kansas State Bank Overbrook Kansas
+Silver Lake Bank
+Fidelity State Bank and Trust Company
+Kaw Valley Bank
+CoreFirst Bank & Trust
+Intrust Bank, National Association
+Commerce Bank of Arizona
+Canyon Community Bank, National Association
+Pacific Premier Bank
+The First Central National Bank of St. Paris
+The Waggoner National Bank of Vernon
+The Bippus State Bank
+KS Bank, Inc.
+Providence Bank
+Peoples State Bank of Plainview
+WNB FINANCIAL, N.A.
+Minnesota First Credit and Savings, Incorporated
+Yakima Federal Savings and Loan Association
+Cashmere Valley Bank
+Baker-Boyer National Bank
+Zapata National Bank
+Texas Heritage Bank
+The First National Bank of Anson
+Texas National Bank
+Reliance Savings Bank
+PennCrest Bank
+1st Summit Bank
+Investment Savings Bank
+Jersey Shore State Bank
+The National Bank of Andrews
+Crews Bank & Trust
+Citizens Bank and Trust Company of Ardmore
+Lewis & Clark Bank
+Bank of Prairie du Sac
+Monona Bank
+Wisconsin River Bank
+Baraboo State Bank
+Bank of Wisconsin Dells
+Wilmington Trust, National Association
+The Fayette County National Bank of Fayetteville
+Whitesville State Bank
+Bedford Federal Savings Bank
+Security Bank USA
+The First National Bank of Bemidji
+First State Bank of Bigfork
+FlatIrons Bank
+AMG National Trust Bank
+Bank of Estes Park
+Bank of Bozeman
+Manhattan Bank
+Branson Bank
+First Community  Bank of the Ozarks
+Chappell Hill Bank
+Bank of Brenham, National Association
+The Brenham National Bank
+North Georgia National Bank
+Commercial Savings Bank
+Breda Savings Bank
+Templeton Savings Bank
+The First National Bank of Manning
+First Trust and Savings Bank
+First Central State Bank
+DeWitt Bank & Trust Co.
+Merrimack County Savings Bank
+Sugar River Bank
+Ledyard National Bank
+Eastern Bank
+Santander Bank, N.A.
+Maple City Savings Bank, FSB
+Cullman Savings Bank
+SouthPoint Bank
+EvaBank
+First Community Bank of Cullman
+Progress Bank and Trust
+The Gerber State Bank
+First National Bank of Pana
+Town And Country Bank
+Peoples Bank of Macon
+Amistad Bank
+Douglas National Bank
+First National Bank of Coffee County
+Dubuque Bank and Trust Company
+WestStar Bank
+Armed Forces Bank, National Association
+BANK 34
+ESB Financial
+The Lyon County State Bank
+First State Bank & Trust Company
+Scribner Bank
+The Exchange Bank of Alabama
+Peoples Independent Bank
+Liberty Bank
+First Piedmont Federal Savings and Loan Association of Gaffney
+FMS Bank
+The Cleveland State Bank
+First American Bank and Trust
+Gulf Coast Bank and Trust Company
+United Bank of Michigan
+Macatawa Bank
+Ameriserv Financial Bank
+Southern Michigan Bank & Trust
+Homestead Savings Bank
+Copiah Bank
+Bank of Yazoo City
+First National Banker's Bank
+Bank of Crockett
+The Bank of Jackson
+Bank3
+The Bank of Milan
+Five Points Bank
+Nebraskaland Bank
+Minden Exchange Bank & Trust Company
+First Bank and Trust Company
+Senath State Bank
+Kennett Trust Bank
+Fulton Bank, National Association
+Jonestown Bank and Trust Company, of Jonestown, Pennsylvania
+The Ephrata National Bank
+The Community Bank
+The Atlanta National Bank
+Bank of Chestnut
+Middletown State Bank
+The Farmers Bank of Mt. Pulaski
+Farmers State Bank of Emden
+Hartsburg State Bank
+JONES BANK
+Cattle Bank and Trust
+West Gate Bank
+I3 Bank
+Cornhusker Bank
+Nebraska Bank of Commerce
+Davidson Trust Co.
+Midwest Independent BankersBank
+Citizens National Bank of Crosbyton
+PlainsCapital Bank
+State Bank of Cross Plains
+The Bank of New Glarus
+The Bank of Brodhead
+Badger Bank
+Bank of Sun Prairie
+Wisconsin Bank & Trust
+Bank of Deerfield
+DMB Community Bank
+Settlers Bank
+Highland State Bank
+Farmers & Merchants State Bank
+Capitol Bank
+The Park Bank
+Union Federal Savings and Loan Association
+Great Midwest Bank, S.S.B.
+Bank Five Nine
+John Deere Financial, f.s.b.
+Bankers' Bank
+First Business Bank
+Oak Bank
+Farmers and Merchants Union Bank
+The Malvern National Bank
+Minnstar Bank National Association
+Profinium, Inc.
+West Bank
+Community Bank Mankato
+BankVista
+St. Clair State Bank (Incorporated)
+Evergreen Federal Bank
+Oregon Pacific Banking Company dba Oregon Pacific Bank
+1st State Bank
+The First National Bank of Stanton
+BAC Community Bank
+Americana Community Bank
+Newport Federal Bank
+Tennessee State Bank
+Stanton State Bank
+Battle Creek State Bank
+American First National Bank
+Campus State Bank
+Citizens Bank of Chatsworth
+State Bank of Graymont
+State Bank Northwest
+Farmington State Bank
+Lamont Bank of St. John
+Ambler Savings Bank
+Fleetwood Bank
+Customers Bank
+Univest  Bank and Trust Co.
+Cornerstone Community Bank
+Farmers & Merchants Bank of Craig County
+Valley Bank of Commerce
+The Bank of Bennington
+Freeland State Bank
+Monterey County Bank
+1st Capital Bank
+Pacific Valley Bank
+Fremont Bank
+Santa Cruz County Bank
+Dogwood State Bank
+Wood & Huston Bank
+La Monte Community Bank
+State Bank of Medora
+Bonduel State Bank
+Bay Bank
+First National Bank in Tigerton
+AllNations Bank
+Olympia Federal Savings and Loan Association
+State Bank
+Century Bank and Trust
+The Turbotville National Bank
+The Muncy Bank and Trust Company
+Susquehanna Community Bank
+The Northumberland National Bank
+First Columbia Bank & Trust Co.
+The Gratz Bank
+Milton Savings Bank
+Mifflinburg Bank and Trust Company
+UNB Bank
+First Northern Bank of Dixon
+Vidalia Federal Savings Bank
+Mount Vernon Bank
+Mission Bank
+The First National Bank of Hutchinson
+Andover State Bank
+Halstead Bank
+State Bank of Burrton
+Impact Bank
+The Stock Exchange Bank, Caldwell, Kansas
+The Citizens State Bank of Cheney, Kansas
+Carson Bank
+Garden Plain State Bank
+Community Bank of Wichita, Inc.
+Emerald Bank
+The Walton State Bank
+Southwest National Bank
+Bankers' Bank of Kansas
+KS StateBank
+Stryv Bank
+The Farmers and Merchants State Bank of Argonia
+Heritage Bank National Association
+Lake Region Bank
+Concorde Bank
+Harvest Bank
+United Minnesota Bank
+PrinsBank
+The First National Bank of Frederick
+Ipswich State Bank
+Timberland Bank
+The State National Bank of Groom
+State Bank of Chilton
+Collins State Bank
+The Bank of Kaukauna
+East Wisconsin Savings Bank
+BLC Community Bank
+American National Bank - Fox Cities
+Thrivent Trust Company
+Exchange Bank & Trust
+Adams State Bank
+First Federal Bank & Trust
+Kirkwood Bank & Trust Co.
+Security First Bank of North Dakota
+Resource Bank
+Pine River State Bank
+Cheyenne State Bank
+Wyoming Bank & Trust
+Connections Bank
+The Callaway Bank
+Citizens Community Bank
+Exchange Bank of Missouri
+Commercial Trust Company of Fayette
+Tri-County Trust Company
+Midwest Regional Bank
+Farmers and Merchants Bank of South Carolina
+Southern First Bank
+Security Federal Bank
+First Reliance Bank
+GrandSouth Bank
+OPTUS Bank
+First Carolina Bank
+Coastal Carolina National Bank
+Union Savings Bank
+Columbus Bank and Trust Company
+Genoa Community Bank
+Bank of Lindsay
+Fidelity Federal Savings and Loan Association of Delaware
+Riverside Bank of Dublin
+First Federal Savings and Loan Association of Lakewood
+Commodore Bank
+First Federal Community Bank of Bucyrus
+THE HOME LOAN SAVINGS BANK
+The Pataskala Banking Company
+First Bank of Central Ohio
+Kingston National Bank
+The Savings Bank
+Fairfield Federal Savings and Loan Association of Lancaster
+Ohio State Bank
+First City Bank
+Nationwide Trust Company, FSB
+The Bank of New York Mellon Trust Company, National Association
+The Waterford Commercial and Savings Bank
+Bank of Rantoul
+Philo Exchange Bank
+Catlin Bank
+The Gifford State Bank
+Movement Bank
+First National Bank in DeRidder
+Beauregard FSB
+The First National Bank & Trust
+First Bank, Upper Michigan
+Upper Peninsula State Bank
+Baybank
+Uinta Bank
+State Bank of Fairmont
+Portage Bank
+Farmers State Bank of Trimont
+Welcome State Bank
+MVB Bank, Inc
+Valley Premier Bank
+Harwood State Bank
+Kindred State Bank
+Alerus Financial, National Association
+VISIONBank
+Dedicated Community Bank
+Mutual Savings Bank
+State Bank of Davis
+Solutions Bank
+Midwest Community Bank
+German-American State Bank
+First State Bank of Newcastle
+First National Bank of Gillette
+Sundance State Bank
+The First National Bank of Granbury
+The First National Bank of Lipan
+F&M Bank and Trust Company
+Royal Banks of Missouri
+Five Points Bank of Hastings
+Adams County Bank
+Range Bank
+Home Bank, National Association
+Peoples Bank of Kankakee County
+State Bank of Herscher
+Municipal Trust and Savings Bank
+The Bank of Bourbonnais
+National Bank of St. Anne
+First State Bank of the Florida Keys
+Gulf Atlantic Bank
+Rondout Savings Bank
+Ulster Savings Bank
+Rhinebeck Bank
+Sawyer Savings Bank
+Walden Savings Bank
+Wallkill Valley Federal Savings and Loan Association
+Salisbury Bank and Trust Company
+The Baldwin State Bank
+Kaw Valley State Bank
+Great American Bank
+TriCentury Bank
+Spring Hill State Bank
+Gilmer National Bank, Gilmer, Texas
+Henderson Federal Savings Bank
+Twin City Bank
+The Citizens Bank Company
+The Settlers Bank
+State Bank of Taunton
+Community Bank of Marshall
+Bank of Montana
+Timberline Bank
+Home Loan State Bank
+Moultrie Bank & Trust
+Mercer County State Bank
+The First State Bank of Red Wing
+Community Bank Owatonna
+1st United Bank
+Premier Bank Minnesota
+First Commercial Bank, National Association
+FNB Picayune Bank
+Centier Bank
+First Farmers & Merchants Bank
+Community Resource Bank
+Heritage Bank Minnesota
+Security State Bank of Kenyon
+Security State Bank of Wanamingo
+Bank of Zumbrota
+Wayne Bank and Trust Co.
+Bank One, National Association
+Village Bank
+Towne Bank
+Community Bankers' Bank
+New Horizon Bank, National Association
+VCC Bank
+Wyoming Community Bank
+Holcomb Bank
+Stillman BancCorp N.A.
+Byron Bank
+The Harvard State Bank
+Blackhawk  Bank
+SENB Bank
+Northwest Bank of Rockford
+St. Charles Bank & Trust Company, National Association
+Charter Bank
+First Bank of Coastal Georgia
+First Chatham Bank
+CoastalStates Bank
+Carver State Bank
+Cowboy State Bank
+Montgomery Bank
+Cumberland Security Bank, Inc.
+Slovenian Savings and Loan Association of Franklin-Conemaugh
+Frontier Community Bank
+Select Bank
+Shenandoah National Bank
+The First National Bank of Fleming
+Seneca Savings
+Fulton Savings Bank
+Solvay Bank
+Pathfinder Bank
+Geddes Federal Savings and Loan Association
+First Federal Savings and Loan Association of Valdosta
+The Citizens National Bank of Quitman
+Barwick Banking Company
+Van Wert Federal Savings Bank
+First Federal Savings and Loan Association of Van Wert
+First National Bank in Port Lavaca
+Wauchula State Bank
+First National Bank of Wauchula
+Waycross Bank & Trust
+The Stock Exchange Bank
+Uwharrie Bank
+Bank of Ann Arbor
+University Bank
+Comerica Bank & Trust, National Association
+Chelsea State Bank
+Black Mountain Savings Bank, SSB
+Capital Bank, National Association
+Conneaut Savings Bank
+Town & Country Bank and Trust Company
+The Lincoln National Bank of Hodgenville
+BankStar Financial
+Richland State Bank
+Citizens National Bank at Brownwood
+South Coast Bank & Trust
+Thomasville National Bank
+Hebron Savings Bank
+Century Bank of Georgia
+The Iuka State Bank
+Kinmundy Bank
+The First National Bank of Sandoval
+Washington Business Bank
+Genesis Bank
+The Jefferson Bank
+Bank of Cleveland
+Andrew Johnson Bank
+Seacoast National Bank
+City National Bank
+Powell State Bank
+Jackson Savings Bank, SSB
+National Bank of Commerce
+Superior Savings Bank
+Park State Bank
+The First National Bank of Buhl
+Boundary Waters Bank
+The Miners National Bank of Eveleth
+The First National Bank of Gilbert
+Security State Bank of Hibbing
+The First National Bank of Moose Lake
+Northern State Bank of Virginia
+North Shore Bank of Commerce
+The First National Bank of Proctor
+Washington Savings Bank
+First State Bank of Beecher City
+Community Valley Bank
+First Foundation Bank
+Smackover State Bank
+Iowa State Bank and Trust Company of Fairfield, Iowa
+Sunwest Bank
+The Farmers Bank, Frankfort, Indiana
+Century Bank of Kentucky, Inc.
+Traditional Bank, Inc.
+Independent Community Bankers' Bank, Inc.
+Citizens Commerce Bank
+Anderson State Bank
+The Peshtigo National Bank
+GreenLeaf Bank
+The Stephenson National Bank and Trust
+Countybank
+Hills Bank and Trust Company
+Farmers and Merchants Savings Bank
+Peoples Trust and Savings Bank
+Solon State Bank
+Peach State Bank & Trust
+First Century Bank, National Association
+PREMIER BANK OF ARKANSAS
+ENCORE BANK
+Three Rivers Bank of Montana
+Guadalupe Bank
+Texas Partners Bank
+Broadway National Bank
+CBBC Bank
+Peoples Bank of the South
+Southern Bank of Tennessee
+Home Federal Bank of Tennessee
+TNBANK
+First Peoples Bank of Tennessee
+Mountain Commerce Bank
+Rayne State Bank & Trust Company
+Gulf Coast Bank
+Catalyst Bank
+St. Landry Bank and Trust Company
+Farmers-Merchants Bank & Trust Company
+M C Bank & Trust Company
+First National Bank of Louisiana
+Bank of Sunset and Trust Company
+South Louisiana Bank
+The First National Bank of Jeanerette
+Bank of Abbeville & Trust Company
+Abbeville Building & Loan (A State-Chartered Savings Bank)
+Bank of Erath
+Basile State Bank
+Bank of Commerce & Trust Co.
+Bank of Gueydan
+Vermilion Bank & Trust Company
+Rayne Building and Loan Association
+PeoplesBank, a Codorus Valley Company
+Bank of Bird-in-Hand
+Presence Bank
+Orrstown Bank
+Centric Bank
+Southwest Capital Bank
+Community 1st Bank Las Vegas
+Kish Bank
+MCS Bank
+Lumbee Guaranty Bank
+The Farmers State Bank of Westmoreland
+Community First National Bank
+Cleveland State Bank
+Bank of Maysville
+Security Bank and Trust Co.
+The Bank, National Association
+The State Bank of Canton, Canton, Kansas
+Marquette Farmers State Bank of Marquette
+State Street Bank and Trust Company
+Bank of Springfield
+Town & Country Bank Midwest
+North Adams State Bank
+Peoples Bank of Wyaconda, Missouri
+Bank of Monticello
+Lake City Federal Bank
+Think Mutual Bank
+Coulee Bank
+Premier Bank Rochester
+ONB Bank
+F & M Community Bank, National Association
+Foresight Bank
+First Southeast Bank
+Root River State Bank
+Luminate Bank
+First State Bank of Fountain
+Rushford State Bank (Incorporated)
+The Canandaigua National Bank and Trust Company
+Evans Bank, National Association
+The Upstate National Bank
+Genesee Regional Bank
+Oostburg State Bank
+Commerce State Bank
+Waldo State Bank
+Black Hills Community Bank, N.A.
+Sentry Bank
+Falcon National Bank
+Liberty Bank Minnesota
+Bonanza Valley State Bank
+State Bank of Cold Spring
+Granite Bank
+Freeport State Bank
+The First National Bank of Milaca
+Stearns Bank Holdingford National Association
+St. Martin National Bank
+First State Bank of Sauk Centre
+Bank of Cherokee County
+West Central Georgia Bank
+The Peoples Bank of Georgia
+Reliabank Dakota
+Bryant State Bank
+American State Bank & Trust Company of Williston
+River Valley Community Bank
+SoFi Bank, National Association
+Produce State Bank
+Arcadian Bank
+Security Bank Minnesota
+Exchange Bank and Trust Company, Natchitoches, Louisiana
+Colfax Banking Company
+Vantage Bank
+The First National Bank of Osakis
+Hustisford State Bank
+TSB Bank
+Mayville Savings Bank
+State Bank of Reeseville
+Idaho Trust  Bank
+Bank of Brookhaven
+First Savings and Loan Association
+Clay County Bank, Inc.
+Logan Bank & Trust Company
+First Federal Savings & Loan Association of Ravenswood
+The Harrison County Bank
+Putnam 1st Mercantile Bank
+First Freedom Bank
+Highland Federal Savings and Loan Association
+The Fidelity State Bank and Trust Company
+The Farmers State Bank of Bucklin, Kansas
+Ford County State Bank
+The First National Bank of Spearville
+Community Banking Company of Fitzgerald
+First State Bank of DeKalb County
+Merit Bank
+South Atlantic Bank
+The Conway National Bank
+ACNB Bank
+First Federal Savings and Loan Association of Greensburg
+The Covington Savings and Loan Association
+Greenville Federal
+Versailles Savings and Loan Company
+Huntingdon Savings Bank
+North Alabama Bank
+First Jackson Bank, Inc.
+Kleberg  Bank, N.A.
+First New Mexico Bank, Las Cruces
+Claremont Savings Bank
+Wells River Savings Bank
+Woodlands Bank
+Logansport Savings Bank
+First Community Bank of Central Alabama
+Valley National Bank
+Merchants & Farmers Bank of Greene County, Alabama
+Bank of Hope
+Metro City Bank
+Citizens Bank of Morgantown, Inc.
+Citizens Bank and Trust Company of Grainger County
+Greenville Savings Bank
+Coastal Community Bank
+Sturdy Savings Bank
+OceanFirst Bank, National Association
+Crest Savings Bank
+1st Bank of Sea Isle City
+Republic Bank
+Franklin Bank
+First National Bank of South Carolina
+The Paducah Bank and Trust Company
+The City National Bank of Metropolis
+Gateway Bank
+Brentwood Bank
+CFSBANK
+Washington Financial Bank
+Mars Bank
+Farmers Building and Savings Bank
+Commercial Bank and Trust of PA
+West View Savings Bank
+Enterprise Bank
+Sewickley Savings Bank
+Compass Savings Bank
+SSB Bank
+Tristate Capital Bank
+Beal Bank
+Slovenian Savings and Loan Association of Canonsburg
+Apollo Trust Company
+Westmoreland Federal Savings and Loan Association
+Elderton State Bank
+Armstrong County Building and Loan Association
+The Pittsfield Co-operative Bank
+Lee Bank
+MountainOne Bank
+Adams Community Bank
+First National Bank of Oklahoma
+Mauch Chunk Trust Company
+First Utah Bank
+LendingClub Bank, National Association
+Capital Community Bank
+Green Dot Bank DBA Bonneville Bank
+First Western Federal Savings Bank
+Texas State Bank
+The First National Bank of Mertzon
+Citizens Bank & Trust, Inc.
+The New Washington State Bank
+Scottsburg Building and Loan Association
+The Payne County Bank
+Security Trust & Savings Bank
+The Roscoe State Bank
+The Torrington Savings Bank
+Northwest Community Bank
+The National Iron Bank
+Thomaston Savings Bank
+Savings Bank of Danbury
+Ion Bank
+Newtown Savings Bank
+First Federal Bank, A FSB
+Citizens Trust Bank
+Bank of Moundville
+Peoples Bank of Greensboro
+Bank of Utica
+Home Savings Bank of Wapakoneta
+First Federal Savings Bank of Washington
+First Citizens State Bank
+State Bank of the Lakes, National Association
+PremierBank
+Live Oak Banking Company
+North State Bank
+The First National Bank of Blanchester
+Liberty Savings Bank, F.S.B.
+First Bank of Boaz
+First New Mexico Bank of Silver City
+DSRM National Bank
+Main Bank
+First American Trust, FSB
+Landmark Bank
+Feliciana Bank & Trust Company
+Bank of Zachary
+Peoples Bank and Trust Company of Pointe Coupee Parish
+Plaquemine Bank & Trust Company
+Anthem Bank & Trust
+Bank of St. Francisville
+First State Bank of Bloomington
+Country Trust Bank
+Anchor State Bank
+Peoples State Bank of Colfax
+The Peoples State Bank
+INSOUTH Bank
+Rockhold Bank
+First Peoples Bank
+Talbot State Bank
+Community Bank and Trust - West Georgia
+Phenix-Girard Bank
+Bristol Morgan Bank
+Florida Capital Bank, National Association
+Muenster State Bank
+The Kearny County Bank
+The Adirondack Trust Company
+Belt Valley Bank
+Heritage Community Bank
+Greeneville Federal Bank, FSB
+Grand Bank for Savings, FSB
+Covington County Bank
+Richton Bank & Trust Company
+Twin River Bank
+Coffee County Bank
+Homeland Community Bank
+Security Federal Savings Bank of McMinnville
+The First National Bank of Middle Tennessee
+Patterson State Bank
+First National Bank Northwest Florida
+Southeast First National Bank
+Englewood Bank & Trust
+Charlotte State Bank & Trust
+Encore  Bank
+New Republic Bank
+Tarboro Savings Bank, SSB
+First Community Bank of Tennessee
+PEOPLES BANK OF MIDDLE TENNESSEE
+Farmers State Bank of Canton
+One American Bank
+Valley Exchange Bank
+Security National Bank of South Dakota
+Pathward, National Association
+Sunrise Banks, National Association
+Citizens Building and Loan, SSB
+Woodruff Federal Savings and Loan Association
+Warren-Boynton State Bank
+Williamsville State Bank & Trust
+Security Bank, s.b.
+Easthampton Savings Bank
+Westfield Bank
+Greenfield Savings Bank
+Greenfield Co-operative Bank
+Florence Bank
+PeoplesBank
+North Brookfield Savings Bank
+Country Bank for Savings
+Monson Savings Bank
+BayBank Valley Trust Company
+BayBank First Easthampton, N.A.
+New Valley Bank & Trust
+O'Bannon Banking Company
+The Seymour Bank
+Ozark Bank
+Citizens Bank of Rogersville
+State Bank of Southwest Missouri
+Systematic Savings Bank
+New Carlisle Federal Savings Bank
+American Commerce Bank, National Association
+Prime Meridian Bank
+TC FEDERAL BANK
+The First National Bank of Assumption
+Citizens Bank of Edinburg
+Midland Community Bank
+First National Bank in Taylorville
+The Hometown Savings Bank
+The Riddell National Bank
+Farmers State Bank of Underwood
+Peoples State Bank, Fairmount, N. D.
+Lincoln State Bank
+F & C Bank
+Southwest Bank of Weatherford
+Oklahoma Bank and Trust Company
+First  Bank of Thomas
+West Plains Savings and Loan Association
+Main Street Bank Corp.
+Belmont Savings Bank
+Adrian State Bank
+State Bank of Lismore
+Rocky Mountain Bank & Trust
+Atkins Savings Bank & Trust
+Benton County State Bank
+Hiawatha Bank and Trust Company
+Cedar Rapids Bank and Trust Company
+The Exchange State Bank
+Mount Vernon Bank and Trust Company
+Palo Savings Bank
+Cedar Valley Bank & Trust
+Walker State Bank
+The Watkins Savings Bank
+The First National Bank of Henning
+Farmers & Merchants State Bank of New York Mills, Incorporated
+Vergas State Bank
+Verus Bank of Commerce
+Bank of Clarks
+Equitable Bank
+Boelus State Bank
+The First National Bank of Coleraine
+Grand Rapids State Bank
+TIAA, FSB
+Cypress Bank & Trust
+Cogent Bank
+Bank of Bluffs
+The Farmers State Bank and Trust Company
+Coastal Bank & Trust
+Lakeside Bank
+Merchants & Farmers Bank & Trust Company
+Lawrenceburg Federal Bank
+Heritage Bank & Trust
+Farmers & Merchants Bank & Trust
+United Bank & Trust Co.
+Martinsville First Savings Bank
+Community First Bank of the Heartland
+The Hershey State Bank
+First Missouri State Bank
+Wake Forest Federal Savings and Loan Association
+Mechanics & Farmers Bank
+RSNB Bank
+The Bank of Delmarva
+Bank of Ocean City
+Discover Bank
+Community Bank Delaware
+The Farmers Bank of Willards
+First Shore Federal Savings and Loan Association
+Applied Bank
+Generations Commercial Bank
+Bank of Calhoun County
+FCB Banks
+Bank of Belleville
+St. Louis Bank
+Jersey State Bank
+Guardian Savings Bank
+The Bradford National Bank of Greenville
+Farmers State Bank of Medora
+Lindell Bank & Trust Company
+The First National Bank in Carlyle
+Germantown Trust & Savings Bank
+Collinsville Building and Loan Association
+First FSB of Mascoutah
+The Village Bank
+Bank of O'Fallon
+State Bank of St. Jacob
+Community Bank of Trenton
+Tempo Bank, A Federal Savings Bank
+Chesterfield State Bank
+First State Bank of St. Charles, Missouri
+Midwest BankCentre
+Meramec Valley Bank
+Farmers and Merchants Bank of St. Clair
+CNB St Louis Bank
+Bank of Washington
+Paramount Bank
+Cass Commercial Bank
+St. Johns Bank and Trust Company
+Bank Star
+Bank of Franklin County
+United Bank of Union
+Stifel Bank and Trust
+Stifel Trust Company, National Association
+M1 Bank
+Parkside Financial Bank & Trust
+Stifel Bank
+Edward Jones Trust Company
+Triad Bank
+CIBC Bank USA
+NEW FRONTIER BANK
+The Bank of Old Monroe
+1st Advantage Bank
+Silex Banking Company
+FMB Bank
+Citizens National Bank of Texas
+Bank of Houston
+Commercial National Bank of Texarkana
+Fidelity Co-operative Bank
+Athol Savings Bank
+Rollstone Bank & Trust
+Enterprise Bank and Trust Company
+Avidia Bank
+Main Street Bank
+Bay State Savings Bank
+The Bank of Canton
+Savers Co-operative Bank
+Webster Five Cents Savings Bank
+Clinton Savings Bank
+UniBank for Savings
+Dean Co-operative Bank
+Millbury National Bank
+Middlesex Savings Bank
+Milford Federal Bank
+The Home National Bank of Milford
+Charles River Bank
+Jewett City Savings Bank
+Centreville Bank
+Eastern Connecticut Savings Bank
+The Union Banking Company
+Citizens Federal Savings and Loan Association
+Miners Exchange Bank
+Morgantown Bank & Trust Company, Incorporated
+Bank of Edmonson County
+American Bank & Trust Company, Inc.
+Connection Bank
+Bank of Stronghurst
+Redwood Capital Bank
+LNB Community Bank
+Boonville Federal Savings Bank
+The First National Bank of Fort Smith
+Citizens' Bank & Trust Co.
+Today's Bank
+Priority Bank
+Bank of Bartlett
+Patriot Bank
+Brighton Bank
+Financial Federal Bank
+Citizens Savings Bank and Trust Company
+Bank of Hancock County
+Titan Bank, N.A.
+BlueHarbor Bank
+First Bethany Bank & Trust
+VALOR BANK
+COMMUNITY BANK OF OKLAHOMA
+FNB Community Bank
+The Citizens Bank of Edmond
+YNB
+McClain Bank
+First Liberty Bank
+Valliance Bank
+Great Nations Bank
+First Enterprise Bank
+Watermark Bank
+Quail Creek Bank
+The Bankers Bank
+Frontier State Bank
+The First Bank of Okarche
+North American Savings Bank, F.S.B.
+The Bendena State Bank
+Bank of Denton
+Old Dominion National Bank
+The International Bank of Amherst
+WOODTRUST BANK
+Paper City Savings Association
+The Pineries Bank
+First National Bank of America
+American Pride Bank
+Intercity State Bank
+Marathon Bank
+Crossbridge Community Bank
+Partners Bank of Wisconsin
+Bank of Clarke County
+The Bank of Romney
+Triad Business Bank
+Carolina Bank
+Peoples Savings and Loan Company
+Galion Building and Loan Bank
+Taylor County Bank
+The Bank of LaFayette, Georgia
+Bank of Dade
+RockPoint Bank, National Association
+First State Bank of Odem
+Tri-County Bank & Trust Company
+Hoosier Heartland State Bank
+Hertford Savings Bank, SSB
+First State Bank of Middlebury
+Everence Trust Company
+The First National Bank of McIntosh
+Peoples Bank of Moniteau County
+The Tipton Latham Bank, National Association
+Farmers Bank of Lohman, Missouri
+State Bank of Missouri
+Country Club Bank
+Blue Ridge Bank and Trust Co.
+America's Community Bank
+Community Bank of Missouri
+The Bank of Grain Valley
+First Federal Bank of Kansas City
+Kearney Trust Company
+Clay County Savings Bank
+Security Bank of Kansas City
+Lead Bank
+Pony Express Bank
+Commercial Bank of Oak Grove, Mo.
+Bank of Odessa
+The Bank of Orrick
+Community Bank of Raymore
+Bank of Weston
+Community Bank of Pleasant Hill
+NBKC Bank
+Central Bank of Kansas City
+National Advisors Trust Company
+The Hamilton Bank
+Adrian Bank
+Citizens Federal Savings Bank
+The First National Bank of Louisburg
+Farmers and Merchants Bank of Mound City, Kansas
+First Federal Savings and Loan Bank
+Bank of Labor
+Bank of the Prairie
+The State Bank of Spring Hill
+Argentine Federal Savings
+Bank of Prairie Village
+Core Bank
+Small Business Bank
+Prescott State Bank
+Horizon Bank, SSB
+First Texas Bank
+The First National Bank of Evant
+The American National Bank of Mount Pleasant
+Owingsville Banking Company
+West Pointe Bank
+Marine Bank & Trust Company
+BankUnited, National Association
+Central Bank & Trust Company
+Riverside Savings Bank, SSB
+Synchrony Bank
+Nelnet Bank
+Optum Bank, Inc.
+Varo Bank, National Association
+Goldman Sachs Bank USA
+Comenity Capital Bank
+Fortis Private Bank
+WEX Bank
+Ally Bank
+FinWise Bank
+Merrick Bank
+Sallie Mae Bank
+Continental Bank
+Liberty Bank, Inc.
+First Electronic Bank
+BMW Bank of North America
+The Pitney Bowes Bank, Inc.
+Morgan Stanley Bank, National Association
+UBS Bank USA
+Celtic Bank
+WebBank
+Holladay Bank & Trust
+Medallion Bank
+Square Financial Services, Inc.
+Royal Business Bank
+COMMONWEALTH BUSINESS BANK
+Martha's Vineyard Bank
+Cape Cod Co-operative Bank
+Seamen's Bank
+The Peoples Bank, Biloxi, Mississippi
+Bank of Wiggins
+Synergy Bank
+State Bank & Trust Company
+South Lafourche Bank & Trust Company
+Auburn Savings Bank, FSB
+Maine Community Bank
+Pilgrim Bank Texas
+First Citizens Bank of Butte
+The Bank of Magnolia Company
+First Federal Savings Bank of Champaign Urbana
+State Bank of Bement
+BankChampaign, National Association
+The Fisher National Bank
+Dewey Bank
+Heritage Bank, Inc.
+The First National Bank of Brooksville
+Republic Bank & Trust Company
+Home Savings Bank, FSB
+Cincinnati Federal
+1st National Bank
+Valley Central Bank
+The Harrison Building and Loan Association
+Miami Savings Bank
+The Cincinnatus Savings & Loan Co.
+FDS Bank
+Peoples First Savings Bank
+The North Side Bank and Trust Company
+CenterBank
+Warsaw Federal Savings and Loan Association
+EAGLE.bank
+Spring Valley Bank
+CBank
+New Foundation Savings Bank
+Bath State Bank
+ClearPoint Federal Bank & Trust
+Buckeye Community Bank
+The Farmers Savings Bank
+The Pioneer Savings Bank
+Credit First National Association
+Integrity Bank & Trust
+Farmers State Bank of Calhan
+Pikes Peak National Bank
+Park State Bank & Trust
+The First National Bank of Germantown
+Monroe Federal Savings and Loan Association
+ESSA Bank & Trust
+First Keystone Community Bank
+First Northern Bank and Trust Company
+Prime Alliance Bank
+Transportation Alliance Bank, Inc. d/b/a TAB Bank
+Bank of Dixon County
+Siouxland Bank
+The Hometown Bank of Alabama
+Millennial Bank
+Alamerica Bank
+CommerceOne Bank
+First Missouri State Bank of Cape County
+The First National Bank of Ava
+The Bank of Herrin
+SouthernTrust Bank
+The First Bank and Trust Company of Murphysboro
+Bank of Crocker
+Security Bank of Pulaski County
+Bank of Milton
+First National Bank of Michigan
+Blue Grass Federal Savings and Loan Association
+Bank of the Bluegrass and Trust Company
+Bank of Lexington, Inc.
+The Four County Bank
+The Millyard Bank
+Fidelity Personal Trust Company, FSB
+Bank of New England
+The Lowell Five Cent Savings Bank
+Primary Bank
+BankProv
+Cambridge Trust Company
+The Guilford Savings Bank
+Essex Savings Bank
+The Milford Bank
+Patriot Bank, National Association
+Bankwell Bank
+NewMil Bank
+New Haven Bank
+Heartland National Bank
+Lakeland Bank
+Provident Bank
+Northfield Bank
+The Bank of Princeton
+Cenlar FSB
+Spencer Savings Bank, SLA
+William Penn Bank
+Kennebec Savings Bank
+Roxboro Savings Bank, SSB
+Grasshopper Bank, N.A.
+The Port Washington State Bank
+Westbury Bank
+Spring Bank
+First Federal Bank of Wisconsin
+Byline Bank
+Waukesha State Bank
+WaterStone Bank, SSB
+PyraMax Bank, FSB
+FORTE BANK
+State Bank of Newburg
+Ixonia Bank
+Northwestern Mutual Wealth Management
+Columbia Savings and Loan Association
+Chelsea Groton Bank
+Dime Bank
+The Washington Trust Company, of Westerly
+The North Country Savings Bank
+GS&L Municipal Bank
+Gouverneur Savings and Loan Association
+The Citizens National Bank of Hammond
+Massena Savings and Loan
+Community Bank of Parkersburg
+Williamstown Bank, Inc.
+Century Savings Bank
+The First National Bank of Elmer
+Newfield National Bank
+Parke Bank
+Millville Savings Bank
+Lake Shore Savings Bank
+Bank of Holland
+Bank of Travelers Rest
+Pickens Savings and Loan Association, FA
+The Bank of Landisburg
+Atlantic Community Bankers Bank
+FineMark National Bank & Trust
+Lake Forest Bank & Trust Company, National Association
+Summit State Bank
+Luther Burbank Savings
+Watertown Savings Bank
+WSB Municipal Bank
+Oconee State Bank
+Classic City Bank
+Bridge City State Bank
+Texas First Bank
+The First Liberty National Bank
+The State Bank of Faribault
+Reliance Bank
+The First National Bank of Le Center
+Lake Country Community Bank
+First Community Bank of East Tennessee
+The Dart Bank
+Capitol National Bank
+Metairie Bank & Trust Company
+Bank of Louisiana
+Hibernia Bank
+Eureka Homestead
+Mutual Savings and Loan Association
+Fifth District Savings Bank
+Mississippi River Bank
+First National Bank USA
+Heritage Bank of St Tammany
+Lone Star National Bank
+Rio Bank
+First Vision Bank of Tennessee
+Peoples Bank & Trust Company
+Denver Savings Bank
+Readlyn Savings Bank
+First National Bank of South Padre Island
+Edison National Bank
+Sanibel Captiva Community Bank
+Gulf Coast Business Bank
+Citizens' Bank, Inc.
+Sidney State Bank
+Grand River Bank
+West Michigan Community Bank
+Northpointe Bank
+The First National Bank of Bangor
+ESB Bank
+Citizens Bank and Trust
+Bank of Central Florida
+Republic Bank of Arizona
+West Valley National Bank
+Goldwater Bank, N.A.
+Arizona Bank & Trust
+Parkway Bank and Trust Company
+Integro Bank
+Gateway Commercial Bank
+Beal Bank USA
+Tradition Capital Bank
+Gainey Business Bank
+Scottsdale Community Bank
+First Internet Bank of Indiana
+North Easton Savings Bank
+HarborOne Bank
+BayBank South
+Bluestone Bank
+Bank of Easton
+Bristol County Savings Bank
+Fall River Five Cents Savings Bank
+BayCoast Bank
+Mechanics Cooperative Bank
+Envision Bank
+BankNewport
+Bank Rhode Island
+Home Loan Investment Bank, F.S.B.
+42 North Private Bank
+Open Bank
+Redstone Bank
+First American State Bank
+Colorado Federal Savings Bank
+Morgan Stanley Private Bank, National Association
+Champion Bank
+Transact Bank, National Association
+Bankers' Bank of the West
+The Bank of Denver
+Young Americans Bank
+CIBC National Trust Company
+Solera National Bank
+Mountain View Bank of Commerce
+Members Trust Company
+Evergreen National Bank
+Mountain Pacific Bank
+The First National Bank of Dennison
+Commencement Bank
+California First National Bank
+The Fidelity Deposit and Discount Bank
+The Luzerne Bank
+Ballston Spa National Bank
+Bank of Richmondville
+Saratoga National Bank and Trust
+First National Bank of Scotia
+Pioneer Commercial Bank
+The First National Bank of Absecon
+Crown Bank
+Middletown Valley Bank
+Sterling Bank and Trust, FSB
+Dearborn Federal Savings Bank
+JPMorgan Chase Bank, Dearborn
+Auto Club Trust, FSB
+First Independence Bank
+Mi Bank
+Huron Valley State Bank
+Meade County Bank
+West Point Bank
+Bank of Buffalo
+Security National Bank of Omaha
+Logan State Bank
+Malvern Bank
+Farmers and Merchants Bank of Ashland
+CerescoBank
+American Interstate Bank
+United Republic Bank
+Bank of Mead
+Access Bank
+Bank of Prague
+Wahoo State Bank
+Foundation One Bank
+Dundee Bank
+First Westroads Bank, Inc.
+Corn Growers State Bank
+Kennebunk Savings Bank
+Partners Bank of New England
+Saco & Biddeford Savings Institution
+Gorham Savings Bank
+Banesco USA
+UniBank
+American Continental Bank
+First Financial Northwest Bank
+Pacific Crest Savings Bank
+Seattle Bank
+First Sound Bank
+GBC International Bank
+Sound Banking Company
+First National Bank of Benton
+Progressive National Bank
+Citizens Bank & Trust Company of Vivian, Louisiana
+G. W. Jones Exchange Bank
+Bank of Lake Mills
+Hancock County Savings Bank, F.S.B.
+Taylorsville Savings Bank, SSB
+Morganton Savings Bank, S.S.B.
+Huntington Federal Savings Bank
+Putnam County Bank
+First & Peoples Bank and Trust Company
+The Commercial Bank of Grayson
+Kentland Bank
+Sandy Spring Bank
+Harford Bank
+Rosedale Federal Savings and Loan Association
+Eastern Savings Bank, FSB
+The Bank of Glen Burnie
+Woori America Bank
+Arundel Federal Savings Bank
+The Glen Burnie Mutual Savings Bank
+Jarrettsville Federal Savings and Loan Association
+CFG Community Bank
+The Harbor Bank of Maryland
+FVCbank
+Firstrust Savings Bank
+Homewood Federal Savings Bank
+Community Bank of the Chesapeake
+Lee County Bank
+State Bank of Nauvoo
+The Hill-Dodge Banking Company
+Kahoka State Bank
+CNB Bank, Inc.
+Bank of Charles Town
+Jefferson Security Bank
+Axiom Bank, National Association
+First Colony Bank of Florida
+The First National Bank of Mount Dora
+Winter Park National Bank
+Fieldpoint Private Bank & Trust
+City National Bank of Florida
+Climate First Bank
+Commerce Bank & Trust
+Sunrise Bank
+Amerasia Bank
+Banco do Brasil Americas
+BankFlorida
+Bandera Bank
+Jefferson Bank
+Castroville State Bank
+The Lytle State Bank of Lytle, Texas
+Atascosa Bank
+TexStar National Bank
+The Moody National Bank
+Schertz Bank & Trust
+Commerce Bank Texas
+Citizens State Bank of Luling
+Texas Capital Bank
+Susser Bank
+USAA Federal Savings Bank
+Montecito Bank & Trust
+Farmers and Merchants Bank of Long Beach
+American Riviera Bank
+Banc of California, National Association
+Community West Bank, National Association
+Community Bank of Santa Maria
+The First National Bank of Waynesboro
+Northern Bank & Trust Company
+MutualOne Bank
+Needham Bank
+Cambridge Savings Bank
+Dedham Institution for Savings
+Brookline  Bank
+Salem Five Cents Savings Bank
+BayBank Harvard Trust Company
+Winchester Co-operative Bank
+Patriot Community Bank
+Winchester Savings Bank
+Leader Bank, National Association
+Reading Co-operative Bank
+BayBank Merrimack Valley, N. A.
+StonehamBank,  A Co-operative Bank
+Haverhill Bank
+Pentucket  Bank
+Methuen Co-operative Bank
+Salem Co-operative Bank
+North Shore Bank, a Co-operative Bank
+Winter Hill Bank, FSB
+Wakefield Co-operative Bank
+Newburyport Five Cents Savings Bank
+Institution for Savings in Newburyport and Its Vicinity
+BayBank and Trust Company
+Marblehead Bank
+BankGloucester
+Cape Ann Savings Bank
+Everett Co-operative Bank
+The National Grand Bank of Marblehead
+Canton Co-operative Bank
+Abington Bank
+Foxboro Federal Savings
+South Shore Bank
+Coastal Heritage Bank
+Southstate Bank for Savings
+Norwood Co-operative Bank
+Stoughton Co-operative Bank
+Walpole Co-operative Bank
+Wrentham Co-operative Bank
+Boston Trust Walden Company
+Commonwealth Co-operative Bank
+OneUnited Bank
+The Cooperative Bank
+East Cambridge Savings Bank
+North Cambridge Co-operative Bank
+Middlesex Federal Savings, F.A.
+Colonial Federal Savings Bank
+First Seacoast Bank
+Piscataqua Savings Bank
+Raccoon Valley Bank
+Earlham Savings Bank
+Guthrie County State Bank
+ITS Bank
+FNNB Bank
+Freedom Financial Bank
+Principal Bank
+Bank of Pensacola
+The Warrington Bank
+FNBT BANK
+Fairfield County Bank
+The First Bank of Greenwich
+Connecticut Community Bank, National Association
+DR Bank
+First County Bank
+Bank of Burlington
+Peoples Trust Company of St. Albans
+The Bank of South Carolina
+Beacon Community Bank
+Liberty Capital Bank
+First IC Bank
+Hanmi Bank
+Golden Bank, National Association
+Benchmark Bank
+Pointbank
+HomeBank Texas
+North Dallas Bank & Trust Co.
+Texas Security Bank
+Inwood National Bank
+State Bank of Texas
+Texas Brand Bank
+Colonial Savings, F.A.
+Southwestern National Bank
+Pavillion Bank
+Bank of Whittier, National Association
+Bank of DeSoto, National Association
+Ennis State Bank
+NexBank
+Providence Bank of Texas, ssb
+Charis Bank
+Pegasus Bank
+Tolleson Private Bank
+Spectra Bank
+One World Bank
+Shinhan Bank America
+United Texas Bank
+T Bank, National Association
+Dallas Capital Bank, National Association
+The First Bank of Celeste
+Grandview Bank
+Worthington National Bank
+NBT Financial Bank
+First National Bank of Burleson
+Texas Exchange Bank
+Austin County State Bank
+The Cowboy Bank of Texas
+Trinity Bank, N.A.
+First Command Bank
+Charles Schwab Bank, SSB
+Charles Schwab Premier Bank, SSB
+The Granger National Bank
+The City National Bank of Taylor
+The First National Bank of Bastrop
+Frontier Bank of Texas
+First-Lockhart National Bank
+The National Bank of Indianapolis
+The North Salem State Bank
+The Home National Bank of Thorntown
+Hendricks County Bank and Trust Company
+Home Bank SB
+Valley Bank of Nevada
+Bank of George
+Charles Schwab Trust Bank
+Toyota Financial Savings Bank
+Wells Fargo National Bank West
+Credit One Bank, National Association
+GenuBank
+Lexicon Bank
+First Security Bank of Nevada
+Axos Bank
+USAA Savings Bank
+First Hope Bank, A National Banking Association
+Skylands Community Bank
+Embassy Bank for the Lehigh Valley
+QNB Bank
+New Tripoli Bank
+The Neffs National Bank
+Quaint Oak Bank
+Jim Thorpe Neighborhood Bank
+Belmont Savings Bank, SSB
+First Federal Savings Bank of Lincolnton
+American Bank of the Carolinas
+Cedar Hill National Bank
+Spratt Savings Bank
+Bank of York
+BayFirst National Bank
+The Bank of Tampa
+Gulfside Bank
+Community Bank of the South
+Home Federal Savings and Loan Association of Niles
+First State Bank of Porter
+American Community Bank of Indiana
+First Savings Bank of Hegewisch
+Providence Bank & Trust
+Old Plank Trail Community Bank, National Association
+Kentland Federal Savings and Loan Association
+Village Bank and Trust, National Association
+Schaumburg Bank & Trust Company, National Association
+American Community Bank & Trust
+Cornerstone National Bank & Trust Company
+Barrington Bank & Trust Company, National Association
+Crystal Lake Bank and Trust Company, National Association
+Home State Bank, National Association
+Northside Community Bank
+BankFinancial, National Association
+Northbrook Bank and Trust Company, National Association
+International Bank of Chicago
+Wintrust Bank, National Association
+Devon Bank
+Libertyville Bank & Trust Company, National Association
+First Bank Chicago
+The Federal Savings Bank
+North Shore Trust and Savings
+INLAND BANK & TRUST
+McHenry Savings Bank
+Republic Bank of Chicago
+CenTrust Bank, National Association
+Pan American Bank & Trust
+First Bank and Trust Company of Illinois
+Liberty Bank for Savings
+Park Ridge Community Bank
+Brickyard Bank
+1st Equity Bank
+Albany Bank and Trust Company National Association
+Hoyne Savings Bank
+Algonquin State Bank
+American Bank and Trust Company, National Association
+Union National Bank and Trust Company of Elgin
+Prairie Community Bank
+Community Bank of Elmhurst
+Hinsdale Bank & Trust Company, National Association
+Forest Park National Bank and Trust Company
+First Eagle  Bank
+The State Bank of Geneva
+Wheaton Bank & Trust, National Association
+Itasca Bank & Trust Co.
+BMO Harris Central National Association
+American Eagle Bank
+Merchants and Manufacturers Bank
+FNBC Bank & Trust
+First Nations Bank
+Heritage Bank of Schaumburg
+First Community Bank and Trust
+Central Federal Savings and Loan Association
+PeopleFirst Bank
+Town Center Bank
+First Secure Community Bank
+The Lemont National Bank
+Marquette Bank
+First Bank of Manhattan
+First Secure Bank and Trust Co.
+LincolnWay Community Bank
+Grundy Bank
+Beverly Bank & Trust Company, National Association
+Midland Federal Savings and Loan Association
+United Trust Bank
+First National Bank of Brookfield
+Evergreen Bank Group
+Lisle Savings Bank
+Bank of Montgomery
+Allied First Bank,sb
+West Town Bank & Trust
+Amalgamated Bank of Chicago
+Waterman Bank
+Belmont Bank & Trust Company
+State Bank of India
+Burling Bank
+Mutual Federal Bank
+Pulaski Savings Bank
+Gold Coast Bank
+Metropolitan Capital Bank & Trust
+American Metro Bank
+GN Bank
+Central Savings, f.s.b.
+North Side Federal Savings and Loan Association of Chicago
+FWBank
+First Security Trust and Savings Bank
+Legacy National Bank
+PCB Bank
+US Metro Bank
+Eastern International Bank
+Habib American Bank
+Commercial Bank of California
+CTBC Bank Corp. (USA)
+Bank of Southern California, N.A.
+City First Bank, National Association
+Universal Bank
+First Credit Bank
+Manufacturers Bank
+American Business Bank
+Mizrahi Tefahot Bank, Ltd.
+CalPrivate Bank
+Partners Bank of California
+EH National Bank
+Malaga Bank F.S.B.
+Industrial and Commercial Bank of China USA, National Association
+Friendly Hills Bank
+First General Bank
+EverTrust Bank
+Mega Bank
+American Plus Bank, N.A.
+First Commercial Bank (USA)
+New OMNI Bank, National Association
+Golden State Bank
+Mission Valley Bank
+Community Commerce Bank
+Pacific Alliance Bank
+United Pacific Bank
+Asian Pacific National Bank
+California Business Bank
+Commerce West Bank
+Nano Banc
+California International Bank, N.A.
+Infinity Bank
+Tustin Community Bank
+First Harrison Bank
+River City Bank, Inc.
+King Southern Bank
+Eclipse Bank, Inc.
+Endeavor Bank
+C3bank, National Association
+Silvergate Bank
+Hatch Bank
+Home Bank of California
+Avidbank
+Heritage Bank of Commerce
+Mission National Bank
+California Pacific Bank
+Bank of San Francisco
+Bank of America California, National Association
+BEACON BUSINESS BANK, NATIONAL ASSOCIATION
+Amalgamated Bank
+First Federal Savings and Loan Association of San Rafael
+Metropolitan Bank
+Community Bank of the Bay
+Pacific Coast Bankers' Bank
+California Bank of Commerce
+Gateway Bank, F.S.B.
+Quad City Bank and Trust Company
+BankOrion
+Northwest Bank & Trust Company
+Blackhawk Bank & Trust
+Blue Grass Savings Bank
+1st Community Bank
+Clackamas County Bank
+Pacific West Bank
+First Federal Savings and Loan Association of McMinnville
+MBank
+First Citrus Bank
+First National Bank of Pasco
+TCM Bank, National Association
+Century Bank of Florida
+Flagship Bank
+Raymond James Bank
+Waterfall Bank
+Georgia Banking Company
+Quantum National Bank
+The Citizens Bank of Georgia
+Touchmark National Bank
+Affinity Bank
+Vinings Bank
+PromiseOne Bank
+Bank of Madison
+Georgia Primary Bank
+Embassy National Bank
+Legacy State Bank
+Tandem Bank
+New Millennium Bank
+Loyal Trust Bank
+Community Bank of Pickens County
+First Bank of Pike
+First National Bank of Griffin
+Unity National Bank of Houston
+Hyperion Bank
+State Bank and Trust Company
+Craft Bank
+RBC Bank, (Georgia) National Association
+Signature Bank of Georgia
+F & M Bank and Trust Company
+Texas Gulf Bank, National Association
+Wells Fargo Bank South Central, National Association
+Agility Bank, National Association
+Amerant Bank, National Association
+Capital Bank
+Gulf Capital Bank
+The Chasewood Bank
+Spirit of Texas Bank, SSB
+The MINT National Bank
+The First National Bank of Bellville
+First National Bank of Lake Jackson
+Texas Traditions Bank
+HomeTown Bank, National Association
+First National Bank of Alvin
+Texas Advantage Community Bank, National Association
+Anahuac National Bank
+Brazos National Bank
+Pearland State Bank
+Orange Bank & Trust Company
+The Berkshire Bank
+ConnectOne Bank
+First Federal Savings of Middletown
+Bank of Millbrook
+Empire State Bank
+Chino Commercial Bank, N.A.
+The Bank of Hemet
+Provident Savings Bank, F.S.B.
+Windsor Federal Savings and Loan Association
+Stafford Savings Bank
+The MassMutual Trust Company
+Prudential Bank & Trust, FSB
+BCB Community Bank
+Columbia Bank
+Peapack-Gladstone Bank
+Kearny Bank
+United Roosevelt Savings Bank
+Alma Bank
+Blue Foundry Bank
+Union County Savings Bank
+GSL Savings Bank
+KEB Hana Bank USA, National Association
+NewBank
+Noah Bank
+Schuyler Savings Bank
+Lusitania Savings Bank
+Haven Savings Bank
+Sumitomo Mitsui Trust Bank (U.S.A.) Limited
+Regal Bank
+Ascendia Bank
+Bogota Savings Bank
+Ponce Bank
+Popular Bank
+Amboy Bank
+Bessemer Trust Company
+Industrial Bank
+NVE Bank
+Apple Bank for Savings
+Cross River Bank
+Manasquan Bank
+Hanover Community Bank
+Freehold Bank
+Brunswick Bank and Trust Company
+Malvern Bank N.A.
+Somerset Savings Bank, SLA
+Magyar Bank
+Abacus Federal Savings Bank
+Flushing Bank
+United Orient Bank
+Eastbank, National Association
+Bank of Baroda
+Metropolitan Commercial Bank
+The First National Bank of Long Island
+Emigrant Bank
+Bank of India
+Emigrant Mercantile Bank
+Piermont Bank
+Bank of China
+Alpine Capital Bank
+Deutsche Bank Trust Company Americas
+Delta National Bank and Trust Company
+Bessemer Trust Company, National Association
+Quontic Bank
+Ridgewood Savings Bank
+Modern Bank, National Association
+Interaudi Bank
+The Bank of East Asia Ltd.
+M.Y. SAFRA BANK, FSB
+Dime Community Bank
+International Finance Bank
+Metropolitan Bank and Trust Company
+Carver Federal Savings Bank
+Bank Hapoalim B.M.
+Safra National Bank of New York
+Global Bank
+Cross County Savings Bank
+The Putnam County National Bank of Carmel
+Sunnyside Federal Savings and Loan Association of Irvington
+Sterling National Bank
+Maspeth Federal Savings and Loan Association
+American Community Bank
+First Central Savings Bank
+National Bank of New York City
+Community Federal Savings Bank
+Esquire Bank, National Association
+The Suffolk County National Bank of Riverhead
+PNB Community Bank
+Intracoastal Bank
+Surety Bank
+Anchor Bank
+Desjardins Bank, National Association
+Ocean Bank
+Terrabank, National Association
+Interamerican Bank, A FSB
+Apollo Bank
+Eastern National Bank
+U. S. Century Bank
+Natbank, National Association
+Pacific National Bank
+Plus International Bank
+Helm Bank USA
+Grove Bank & Trust
+Intercredit Bank, National Association
+Professional Bank
+Bradesco BAC Florida Bank
+The First National Bank of South Miami
+Sunstate Bank
+Locality Bank
+Paradise Bank
+OptimumBank
+FLAGLER BANK
+Bank of Belle Glade
+The First National Bank of River Falls
+River Falls State Bank
+Cambridge State Bank
+Castle Rock Bank
+Security State Bank of Marine
+Lake Area Bank
+Vermillion State Bank
+North American Banking Company
+Flagship Bank Minnesota
+Lake Elmo Bank
+Lakeview Bank
+New Market Bank
+The First State Bank of Rosemount
+Key Community Bank
+First State Bank of Wyoming
+Bridgewater Bank
+BankCherokee
+Drake Bank
+North Star Bank
+21st Century Bank
+Highland Bank
+Platinum Bank
+Lake Central Bank
+First Bank Elk River
+Sherburne State Bank
+BANKWEST
+The First National Bank of Cokato
+MINNESOTA LAKES BANK
+The Bank of Elk River
+Farmers State Bank of Hamel
+First Minnetonka City Bank
+Citizens Independent Bank
+American Investors Bank and Mortgage
+Riverland Bank
+Lake Community Bank
+Bank of Maple Plain
+Citizens State Bank of Waverly, Inc.
+Citizens State Bank Norwood Young America
+AMERIPRISE BANK, FSB
+VisionBank
+EntreBank
+United Bankers' Bank
+Elysian Bank
+PEOPLES BANK
+Bank of Little Rock
+The Old Point National Bank of Phoebus
+Integrity Bank for Business
+Haddon Savings Bank
+Huntingdon Valley Bank
+The Pennsville National Bank
+1st Colonial Community Bank
+Monroe Savings Bank
+Penn Community Bank
+Harleysville Bank
+Meridian Bank
+First National Bank and Trust Company of Newtown
+Hatboro Federal Savings, FA
+Prudential Bank
+United Savings Bank
+Iron Workers Savings Bank
+Sharon Bank
+County Savings Bank
+The Haverford Trust Company
+United Bank of Philadelphia
+Second Federal Savings and Loan Association of Philadelphia
+The Philadelphia Trust Company
+Asian Bank
+Tioga-Franklin Savings Bank
+Port Richmond Savings
+The National Bank of Malvern
+Phoenixville Federal Bank and Trust
+SEI Private Trust Company
+The Victory Bank
+HSBC Trust Company (Delaware), National Association
+Barclays Bank Delaware
+Comenity Bank
+Deutsche Bank Trust Company Delaware
+Stifel Trust Company Delaware, National Association
+TD Bank USA, National Association
+AIG Federal Savings Bank
+The Bancorp Bank
+BNY Mellon Trust of Delaware
+Cecil Bank
+InsBank
+Volunteer State Bank
+TriStar Bank
+Bank of Dickson
+Sumner Bank & Trust
+Fourth Capital Bank
+CedarStone Bank
+Studio Bank
+Truxton Trust Company
+EagleBank
+The National Capital Bank of Washington
+John Marshall Bank
+Presidential Bank, FSB
+Trustar Bank
+Founders Bank
+MainStreet Bank
+The Freedom Bank of Virginia
+Burke & Herbert Bank & Trust Company
+Oak View National Bank
+Forbright Bank
+Virginia Partners Bank
+Woodsboro Bank
+Chain Bridge Bank, National Association
+CresCom Bank
+
+
+
+WHENEVER I ASK YOU TO GENERATE A QUERY FOR A PARTICULAR INTSTITUTE(BANK), GENERATE IT USING THE NAMES ABOVE.
+
+For example, if I ask you to write a query for "number of branches of bank of america", you have to give the query as
+"SELECT count(institution_name) FROM `halogen-episode-433706-a4.NLPTOSQL.LOCATIONS`
+WHERE institution_name='Bank of America, National Association'"
+
+DO NOT INCLUDE ``` AT THE BEGINNING AND ENDING OF THE QUERY. I SAY DO NOT.
+
+}
