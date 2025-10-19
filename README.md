@@ -48,8 +48,8 @@ flowchart TD
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/nl-to-sql-gemini.git
-   cd nl-to-sql-gemini
+   git clone [https://github.com/your-username/nl-to-sql-gemini.git](https://github.com/tejslm/nlptosql.git)
+   cd nlptosql
    ```
 
 2. **Install Dependencies**
@@ -98,12 +98,6 @@ An interactive table and visualization of sales by region.
 ## 🌐 Deployment
 
 The application can be deployed directly on [Streamlit Cloud](https://streamlit.io/cloud).
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
 
 ---
 
