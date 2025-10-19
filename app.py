@@ -22,7 +22,7 @@ project_id = "halogen-episode-433706-a4"
 
 # Function to load Google Gemini model and provide queries as response
 def get_gemini_response(user_input, prompt):
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     response = model.generate_content([prompt, user_input])
     output_query = response.text.strip()
     # Remove ```sql ``` formatting
