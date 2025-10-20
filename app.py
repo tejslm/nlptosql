@@ -1,13 +1,21 @@
 from dotenv import load_dotenv
-
-load_dotenv()  # Loading all environment variables
-
 from google.cloud import bigquery
 from google.oauth2 import service_account
 import google.generativeai as genai
 import streamlit as st
 import os
 import json
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+load_dotenv()
+
+# Configure Google Generative AI
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+else:
+    st.error("Please set GEMINI_API_KEY in your environment variables")
+    st.stop()
 
 # Define Your Prompt
 file = open("finalprompt.txt", "r")
@@ -15,21 +23,18 @@ prompt = file.read()
 file.close()
 
 # Configure Genai key
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 key_path = "halogen-episode-433706-a4-6a1ca4a71658.json"
 project_id = "halogen-episode-433706-a4"
 
-
-# Function to load Google Gemini model and provide queries as response
 def get_gemini_response(user_input, prompt):
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    response = model.generate_content([prompt, user_input])
-    output_query = response.text.strip()
+    model = ChatGoogleGenerativeAI(model = 'gemini-2.5-flash')
+    question_for_llm = [("system",prompt), ("human", user_input),]
+    response = model.invoke(question_for_llm)
+    output_query = response.text().strip()
     # Remove ```sql ``` formatting
     if output_query.startswith("```sql"):
         output_query = output_query[6:-3].strip()
     return output_query
-
 
 # Connecting to BigQuery and get results using our table in the project
 def execute_sql_from_file(key_path, project_id, output_query):
@@ -46,7 +51,6 @@ def execute_sql_from_file(key_path, project_id, output_query):
     except Exception as e:
         print(f"Error executing query: {e}")
         return []
-
 
 # Streamlit app
 image_url="https://freepngimg.com/thumb/disney/128008-genie-download-free-image.png"
@@ -75,12 +79,12 @@ if submit:
                 prompt1 = file1.read()
                 file.close()
                 def convert_to_nl(row_string, prompt1, question):
-                    model = genai.GenerativeModel('gemini-pro')
-                    response = model.generate_content([prompt1, row_string, question])
-                    output_query = response.text.strip()
+                    model = ChatGoogleGenerativeAI(model = 'gemini-2.5-flash')
+                    question_for_llm = [("system",prompt1), ("human", row_string),]
+                    response = model.invoke(question_for_llm)
+                    output_query = response.text().strip()
                     return output_query
                 natural=convert_to_nl(row_string, prompt1, question)
                 st.write(natural)
         else:
             st.write("No data found for the given query.")
-
