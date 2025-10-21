@@ -3,3 +3,4 @@ google-generativeai
 python-dotenv
 google-cloud-bigquery
 google-cloud-storage
+langchain_google_genai
